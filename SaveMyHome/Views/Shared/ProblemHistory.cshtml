@@ -1,0 +1,68 @@
+﻿@model IEnumerable<SaveMyHome.ViewModels.ProblemHistoryVM>
+@{
+    ViewBag.Title = "ProblemHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    @if(TempData["msg"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["msg"]
+        </div>
+    }
+        
+<div class="panel panel-info">
+    <div class="panel panel-heading">История проблем</div>
+    <div class="panel panel-body">
+        @if (Model.Count() == 0)
+        {
+            <h2 class="text-center">Проишествий не было</h2>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@Html.LabelFor(m => m.First().Name)</th>
+                        <th>@Html.LabelFor(m => m.First().Start)</th>
+                        <th>@Html.LabelFor(m => m.First().End)</th>
+                        <th>@Html.LabelFor(m => m.First().Culprit)</th>
+                        <th>@Html.LabelFor(m => m.First().Victims)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                    {
+                        <tr>
+                            <td>@m.Name</td>
+                            <td>@m.Start</td>
+                            <td>@m.End</td>
+                            <td>@m.Culprit</td>
+                            @if (m.Victims.Count() > 0)
+                            {
+                                <td>
+                                    <ul style="overflow: hidden; list-style-type:none; ">
+                                        @foreach (var victim in m.Victims)
+                                        {
+                                            <li style="float: left; display: block; padding: 10px;">
+                                                <a href="#">@victim</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>Жертв нет</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        
+    </div>
+   <div class="panel panel-footer">
+       @Html.ActionLink("Выйти", "Index","Home", null, new { @class = "btn btn-default" })
+   </div>
+</div>

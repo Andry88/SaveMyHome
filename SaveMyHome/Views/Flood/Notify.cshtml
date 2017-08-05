@@ -1,0 +1,44 @@
+﻿@using SaveMyHome.Models
+@model SaveMyHome.ViewModels.NotifyVM
+
+@{
+    ViewBag.Title = "Настройки оповещения";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    int apartment;
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="panel panel-primary">
+        <div class="panel panel-heading"><b>Настройки оповещения: </b></div>
+        <div class="panel panel-body">
+                <fieldset>
+                    <legend> Оповестить квартиры:</legend>
+                    @Html.ValidationSummary()
+                    <div>
+                        @for (int i = 0; i < Model.Apartments.Count; i++)
+                        {
+                            apartment = Model.Apartments[i];
+                            <label>@apartment</label>
+                            <input type="checkbox" name="Apartments" value="@apartment" checked>
+                        }
+                        @Html.HiddenFor(m => m.ProblemStatus)
+                        @Html.HiddenFor(m => m.ProblemId)
+                        @Html.HiddenFor(m => m.IsSecondNotify)
+                    </div>
+                </fieldset>
+            <div class="form-group">
+                <label>Способ оповещения:</label>
+            </div>
+            <div class="form-group">
+                <div>@Html.LabelFor(m => m.HeadMessage)</div>
+                <div>@Html.TextAreaFor(m => m.HeadMessage, new { rows = "5", cols = "50", @class = "form-control" })</div>
+            </div>
+        </div>
+        <div class="panel panel-footer">
+            <input type="submit" value="SOS" class="btn btn-danger" />
+        </div>
+    </div>
+}
+

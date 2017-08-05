@@ -1,0 +1,41 @@
+﻿@model SaveMyHome.ViewModels.UserVM
+
+@{
+    ViewBag.Title = "Подробные сведения";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="well row">
+    <div class="col-md-4">
+        @if (Model.ImageData != null)
+        {
+            <div class="pull-left" style="margin-right:20px">
+                <img class='img-thumbnail img-responsive' style='width:275px; height:350px;'
+                     src="data:@Model.ImageMimeType;base64,@Convert.ToBase64String(Model.ImageData)" alt="Фото" />
+            </div>
+        }
+    </div>
+    <div class="col-md-4 col-md-offset-2">
+        <table class="table table-hover">
+                    @foreach (var p in ViewData.ModelMetadata.Properties)
+                    {
+                        switch (p.PropertyName)
+                        {
+                            case "Id":
+                            case "ImageData":
+                            case "ImageMimeType":
+                                break;
+                            default:
+                                <tr>
+                                    <th>@Html.Label(p.PropertyName)</th>
+                                    <td>@Html.Display(p.PropertyName)</td>
+                                </tr>
+                                break;
+                        }
+                    }
+        </table>
+    </div>
+</div>
+    @Html.ActionLink("Назад к списку жильцов", "GetPeople", null, new { @class ="btn btn-primary"})

@@ -1,0 +1,18 @@
+﻿@using SaveMyHome.Models
+@model SaveMyHome.ViewModels.AnswerVM
+
+@{
+    ViewBag.Title = "Ответ потенциальной жертвы";
+    Layout = "~/Views/Shared/_AnswerLayout.cshtml";
+}
+
+@Html.RadioButton("VisitorProblemStatus", @ProblemStatus.None, true, new { id = "PotentialVictim" })
+<span>Меня не затопило</span><br />
+@Html.RadioButton("VisitorProblemStatus", @ProblemStatus.Victim)
+<span>Меня затопило</span>
+
+@Html.HiddenFor(a => a.IsFromPotentialCulprit)
+
+@section scripts{
+    @Scripts.Render("~/bundles/RadioButton")
+}

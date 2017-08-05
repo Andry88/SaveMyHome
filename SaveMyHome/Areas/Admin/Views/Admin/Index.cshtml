@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Панель управления";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
+
+<H2>@ViewBag.Title</H2>
+<div class="list-group">
+    @Html.ActionLink("История посещений", "Log", null, new { @class = "list-group-item" }) <br />
+    @Html.ActionLink("Учетные данные пользователей", "Accounts", null, new { @class = "list-group-item" })
+</div>

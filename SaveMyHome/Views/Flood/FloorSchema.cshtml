@@ -1,0 +1,41 @@
+﻿@using SaveMyHome.Models;
+@using System.Collections;
+@model IEnumerable<Reaction>
+
+
+@{ 
+    List<int> floors = Model.Select(a => a.Apartment.Floor).Distinct().ToList();//этажи, где находятся оповещенные квартиры
+    //Т.к. коллекции элементы указаных ниже коллекций будут перебираться во вложенных циклах,
+    //для увеличения производительности можно преобразовать их в HeshSet
+    HashSet<int> notifiedApartments = new HashSet<int>(Model.Select(a => a.ApartmentNumber));//оповещенные квартиры
+    HashSet<int> victims = new HashSet<int>(Model.Where(r => r.ProblemStatus == ProblemStatus.Victim).Select(a => a.ApartmentNumber));//оповещенные квартиры-жертвы
+    HashSet<int> none = new HashSet<int>(Model.Where(r => r.ProblemStatus == ProblemStatus.None).Select(a => a.ApartmentNumber));//оповещенные квартиры-виновники
+}
+
+@foreach (var floor in floors)
+{
+    <div class="container col-md-6">
+        <img src=@Url.Content("~/Content/images/schema.svg") alt="Schema"/>
+        @{var apartments = House.GetApartmentsByFloor(floor);
+          int apartment;}
+        
+        @for (int i = 0; i < apartments.Count; i++)
+        {
+            apartment = apartments[i];
+            bool IsNotified, IsVictim, IsNone;
+
+            IsNotified = notifiedApartments.Contains(apartment) ? true : false;
+            IsVictim = victims.Contains(apartment) ? true : false;
+            IsNone = none.Contains(apartment) ? true : false;
+
+            <div class='number position_@(i+1) 
+                 @(IsVictim ? "victim" : "") @(IsNone ? "none" : "") 
+                 @(IsVictim == false && IsNone == false && IsNotified ? "notified" : "")'>
+                @apartment
+            </div>
+        }
+        <div class="number center">@floor этаж</div>
+    </div>
+}
+
+

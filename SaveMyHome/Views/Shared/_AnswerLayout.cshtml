@@ -1,0 +1,45 @@
+﻿@using SaveMyHome.Models
+@model SaveMyHome.ViewModels.AnswerVM
+@{
+    ViewBag.Title = "Ответ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-warning">
+    <div class="panel panel-heading">
+        @Html.Action("HeadMessage")
+    </div>
+    <div class="panel panel-body">
+        <div class="form-group">
+            @Html.Action("FloorSchema")
+        </div>
+    </div>
+    @Html.Action("AnswerMessages")
+</div>
+
+<div class="panel panel-primary">
+    @using (Html.BeginForm("Answer", "Flood"))
+    {
+        <div class="panel panel-heading"><b>Ответить: </b></div>
+        <div class="panel panel-body">
+            <div class="form-group">
+                <div class="radio">
+                    @RenderBody()
+                </div>
+            </div>
+            <div id="message" class="form-group">
+                <div>@Html.LabelFor(m => m.CurrAnswer)</div>
+                <div>@Html.TextArea("CurrAnswer", null, 5, 50, new { @class = "form-control" })</div>
+                <div>@Html.ValidationMessageFor(m => m.CurrAnswer)</div>
+            </div>
+        </div>
+        <div class="panel panel-footer">
+            <input type="submit" value="Ответить" class="btn btn-danger" />
+        </div>
+    }
+</div>
+@*}*@
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)

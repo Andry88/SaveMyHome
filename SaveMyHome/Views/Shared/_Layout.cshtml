@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Save my Home</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul id="menu" class="nav navbar-nav">
+                    <li>@Html.ActionLink("Главная", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Потоп <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Меня топят", "Notify", "Flood", 
+                               new { problemStatus = SaveMyHome.Models.ProblemStatus.Victim }, null)</li>
+                            <li>@Html.ActionLink("Я топлю", "Notify", "Flood", 
+                               new { problemStatus = SaveMyHome.Models.ProblemStatus.Culprit }, null)</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Пожар", "Index", "Home")</li>
+                    <li>@Html.ActionLink("История проишествий", "ProblemHistory", "Problem")</li>
+                    <li>@Html.ActionLink("О доме", "GetPeople", "Home")</li>
+                    </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Save my Home</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,97 @@
+﻿.container {
+    position: relative;
+}
+
+.number {
+    font-size: 30px;
+    font-weight: bold;
+    color: grey;
+}
+
+/*#region Мигание и оранжевый цвет для еще неответивших оповещенных квартир */
+.notified {
+    color: orange;
+    -webkit-animation: blink2 1s linear infinite;
+    animation: blink2 1s linear infinite;
+}
+
+@-webkit-keyframes blink2 {
+    100% {
+        color: rgba(34, 34, 34, 0);
+    }
+}
+
+@keyframes blink2 {
+    100% {
+        color: rgba(34, 34, 34, 0);
+    }
+}
+
+/*#endregion */
+
+/*#region   Цвета квартир жертв и непострадавших */
+
+.victim {
+    color: red;
+}
+
+.none {
+    color: green;
+}
+
+/*#endregion */
+
+/*#region Позиционирование номеров квартир и этажа */
+
+.position_1 {
+    position: absolute;
+    bottom: 35px;
+    left: 145px;
+}
+
+.position_2 {
+    position: absolute;
+    bottom: 140px;
+    left: 120px;
+}
+
+.position_3 {
+    position: absolute;
+    top: 35px;
+    left: 165px;
+}
+
+.position_4 {
+    position: absolute;
+    top: 35px;
+    right: 205px;
+}
+
+.position_5 {
+    position: absolute;
+    bottom: 140px;
+    right: 155px;
+}
+
+.position_6 {
+    position: absolute;
+    bottom: 35px;
+    right: 175px;
+}
+
+.center {
+    position: absolute;
+    right: 10px;
+    top: 44%;
+    width: 100%;
+    text-align: center;
+}
+/*#endregion */
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+
+

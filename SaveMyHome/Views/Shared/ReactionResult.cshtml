@@ -1,0 +1,26 @@
+﻿@model SaveMyHome.ViewModels.AnswerVM
+@{
+    ViewBag.Title = "Результат";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
+
+<div class="panel panel-warning">
+    <div class="panel panel-heading">
+        @Html.Action("HeadMessage")
+    </div>
+    <div class="panel panel-body">
+        <div class="form-group">
+            @Html.Action("FloorSchema")
+        </div>
+    </div>
+    @Html.Action("AnswerMessages")
+</div>
+
+    @Html.ActionLink("Покинуть страницу", "Index", "Home", null, new { @class = "btn btn-success" })
