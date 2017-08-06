@@ -10,12 +10,21 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using System.Data.Entity;
+using SaveMyHome.Helpers;
+using SaveMyHome.Abstract;
 
 namespace SaveMyHome.Controllers
 {
     [ForUsers]
     public class FloodController : Controller
     {
+        INotifyProcessor notifyProcessor;
+
+        public FloodController(INotifyProcessor notifyProcessor)
+        {
+            this.notifyProcessor = notifyProcessor;
+        }
+
         #region Notify
         /// <summary>
         /// Взависимости от статуса оповещающего генерирует список оповещаемых квартир, главное сообщение по умолчанию
@@ -50,8 +59,7 @@ namespace SaveMyHome.Controllers
                 }
             }
             else
-            {
-                //если оповещающий не находится на последнем этаже,
+            {   //если оповещающий не находится на последнем этаже,
                 //то создается сообщение по-умолчанию для жертвы потопа,
                 //иначе выводится сообщение о невозможности затопления его кем-либо
                 if (currApart.Floor != House.FloorsCount)
@@ -139,8 +147,7 @@ namespace SaveMyHome.Controllers
                     db.SaveChanges();
                 }
                 else
-                {
-                    //Создание реакции текушей квартиры
+                {   //Создание реакции текушей квартиры
                     var reactions = new List<Reaction>
                     {
                         new Reaction
@@ -174,6 +181,10 @@ namespace SaveMyHome.Controllers
                     db.Entry(_event).State = EntityState.Added;
                     db.SaveChanges();
                 }
+                
+                //Оповестить через email
+                if (model.SendEmail)
+                    notifyProcessor.ProcessNotify(msg, GetNotifiedApartments().Select(r => r.Apartment).ToList());
 
                 return View("ReactionResult", new AnswerVM
                 {
@@ -365,7 +376,7 @@ namespace SaveMyHome.Controllers
         }
 
         //Получает из БД оповещенные квартиры
-        private IEnumerable <Reaction> GetNotifiedApartments()
+        private IEnumerable<Reaction> GetNotifiedApartments()
         {
            return db.Reactions.Include(r => r.Apartment).Where(r => r.EventId == CurrEventId && !r.Notifier)
                               .OrderBy(r => r.ApartmentNumber);

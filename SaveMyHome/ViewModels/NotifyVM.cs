@@ -15,6 +15,8 @@ namespace SaveMyHome.ViewModels
         public IList<int> Apartments { get; set; }
 
         public ProblemStatus ProblemStatus { get; set; }
+        [Display(Name = "Отправить email")]
+        public bool SendEmail { get; set; }
 
         [Display(Name = "Текст сообщения:"), Required(ErrorMessage = "Напишите сообщение")]
         public string HeadMessage { get; set; }
