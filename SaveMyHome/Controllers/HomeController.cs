@@ -11,8 +11,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin.Security;
 
 namespace SaveMyHome.Controllers
 {

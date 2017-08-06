@@ -1,19 +1,7 @@
-﻿using SaveMyHome.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
-using System.Data.Entity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.AspNet.Identity;
-using SaveMyHome.Infrastructure;
-using SaveMyHome.Models;
-using System.Security.Claims;
-using System.Threading;
-using System.Web.Mvc;
-using System.Web.UI.WebControls;
 
 namespace SaveMyHome.Models
 {

@@ -9,7 +9,6 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Collections.Generic;
 using SaveMyHome.Areas.Admin.Models;
-using System.Data.Entity.Migrations;
 
 namespace SaveMyHome.Models
 {
