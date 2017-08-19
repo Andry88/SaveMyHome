@@ -11,23 +11,42 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using Microsoft.Owin.Security;
+using System.Data.Entity;
+using SaveMyHome.Infrastructure.Repository.Abstract;
+using System.Linq.Expressions;
 
 namespace SaveMyHome.Controllers
 {
-    [ForUsers]
+    [Authorize]
     public class HomeController : Controller
     {
+        IUnitOfWork Database;
+        public HomeController(IUnitOfWork database)
+        {
+            Database = database;
+        }
+
         //Выводит главную страницу, а также. если пользователь аутентифицирован,
         //передает в представление статус посетителя для последующего принятия решения в представлении 
         //о необходимости отобразить кнопку "Внимание" 
         [AllowAnonymous]
-        public ActionResult Index()
+        public ViewResult Index()
         {
             if (User.Identity.IsAuthenticated)
             {
-                var reactions = CurrUser.Apartment.Reactions;
+                List<Reaction> reactions = null;
+                try
+                {
+                    reactions = Database.ClientProfiles.CurrentUserProfile.Apartment.Reactions.ToList();
+                }
+                catch (NullReferenceException)
+                {
+                    reactions = new List<Reaction>();
+                }
+                
                 if (reactions.Count > 0)
-                    ViewBag.ProblemStatus = reactions.Last().ProblemStatus;
+                    ViewBag.ProblemStatus = reactions.LastOrDefault().ProblemStatus;
             }
             return View();
         }
@@ -35,7 +54,7 @@ namespace SaveMyHome.Controllers
         //Выводит список жильцов дома,
         //осуществяет сортировку списка по имени и номеру квартиры по возрастанию и убыванию,
         //поиск по имени и пагинацию
-        public ActionResult GetPeople(string sortOrder, string currentFilter, string searchString, int? page)
+        public ViewResult GetPeople(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -48,7 +67,7 @@ namespace SaveMyHome.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var users = UserManager.Users;
+            var users = Database.ClientProfiles.AllIncluding(u => u.ApplicationUser);
 
             if (!String.IsNullOrEmpty(searchString))
                 users = users.Where(s => s.LastName.Contains(searchString)
@@ -70,8 +89,11 @@ namespace SaveMyHome.Controllers
                     break;
             }
 
-            Mapper.Initialize(cfg => cfg.CreateMap<ApplicationUser, UserVM>());
-            IEnumerable<UserVM> models = Mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<UserVM>>(users);
+            Mapper.Initialize(cfg => cfg.CreateMap<ClientProfile, UserVM>()
+            .ForMember(vm => vm.Email, conf => conf.MapFrom(cp => cp.ApplicationUser.Email))
+            .ForMember(vm => vm.PhoneNumber, conf => conf.MapFrom(cp => cp.ApplicationUser.PhoneNumber)));
+            
+            var models = Mapper.Map<IQueryable<ClientProfile>, IEnumerable<UserVM>>(users);
 
             int pageSize = 12;
             int pageNumber = (page ?? 1);
@@ -84,20 +106,23 @@ namespace SaveMyHome.Controllers
         {
             if (Id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var user = Database.ClientProfiles.GetUserWithProfile(Id);
 
-            var user = UserManager.Users.First(u => u.Id == Id);
-            if (user == null)
+            if(user == null)
                 return HttpNotFound();
-
-            Mapper.Initialize(cfg => cfg.CreateMap<ApplicationUser, UserVM>());
-            UserVM model = Mapper.Map<ApplicationUser, UserVM>(user);
+            
+            Mapper.Initialize(cfg => cfg.CreateMap<ClientProfile, UserVM>()
+            .ForMember(vm => vm.Email, conf => conf.MapFrom(cp => cp.ApplicationUser.Email))
+            .ForMember(vm => vm.PhoneNumber, conf => conf.MapFrom(cp => cp.ApplicationUser.PhoneNumber)));
+            UserVM model = Mapper.Map<ClientProfile, UserVM>(user);
 
             return View(model);
         }
 
-        #region Helpers
-        private ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-        private ApplicationUser CurrUser => UserManager.FindByEmail(User.Identity.Name);
-        #endregion
+        protected override void Dispose(bool disposing)
+        {
+            Database.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

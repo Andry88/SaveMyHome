@@ -6,17 +6,23 @@ using System.Web;
 using System.Web.Mvc;
 using SaveMyHome.ViewModels;
 using SaveMyHome.Filters;
+using SaveMyHome.Infrastructure.Repository.Abstract;
 
 namespace SaveMyHome.Controllers
 {
-    [ForUsers]
+    [Authorize]
     public class ProblemController : Controller
     {
-        //Выводит историю проблем
-        public ActionResult ProblemHistory()
+        IUnitOfWork Database;
+        public ProblemController(IUnitOfWork unitOfWork)
+        {
+            this.Database = unitOfWork;
+        }
+
+        public ViewResult ProblemHistory()
         {
             var problemHistory =
-                db.Events.Include(p => p.Problem).Include(r => r.Reactions)
+                Database.Events.AllIncluding(p => p.Problem, r => r.Reactions)
                                           .Where(e => e.End != null)
                                           .Select(e => new ProblemHistoryVM
                                           {
@@ -30,6 +36,11 @@ namespace SaveMyHome.Controllers
 
             return View(problemHistory);
         }
-        private ApplicationDbContext db => HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+
+        protected override void Dispose(bool disposing)
+        {
+            Database.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

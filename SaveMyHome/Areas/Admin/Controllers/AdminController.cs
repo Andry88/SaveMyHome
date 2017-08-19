@@ -2,7 +2,11 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using SaveMyHome.DAL;
+using SaveMyHome.Infrastructure.Repository.Abstract;
 using SaveMyHome.Models;
+using SaveMyHome.ViewModels;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -10,19 +14,25 @@ using System.Web.Mvc;
 
 namespace SaveMyHome.Areas.Admin.Controllers
 {
-    //[Authorize(Roles = nameof(AppRoles.Admin))]
+    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
+        IUnitOfWork Database;
+        public AdminController(IUnitOfWork database)
+        {
+            Database = database;
+        }
+
         //Выводит меню управления
         public ActionResult Index() => View();
 
         //Выводит список посещаемых пользователями страниц сайта 
-        public ActionResult Log()=> View(db.Visitors.ToList());
+        public ActionResult Log()=> View(Database.Visitors.All.ToList());
 
         //Выводит список зарегистрированных пользователей
-        public ActionResult Accounts() => View(UserManager.Users.OrderBy(u => u.ApartmentNumber));
+        public ActionResult Accounts() => View(UserManager.Users
+            .OrderBy(u => u.ClientProfile.ApartmentNumber).ToList());
 
-        
         public ActionResult Create()=> View();
 
         [HttpPost]
@@ -31,11 +41,23 @@ namespace SaveMyHome.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                Mapper.Initialize(cfg => cfg.CreateMap<RegisterViewModel, ApplicationUser>());
-                ApplicationUser user = Mapper.Map<RegisterViewModel, ApplicationUser>(model);
-
-                IdentityResult result =
-                    await UserManager.CreateAsync(user);
+                ApplicationUser user = new ApplicationUser
+                {
+                    Email = model.Email,
+                    UserName = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    ClientProfile = new ClientProfile
+                    {
+                        Age = model.Age,
+                        ApartmentNumber = model.ApartmentNumber,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        Hobbies = model.Hobbies,
+                        Skills = model.Skills,
+                        SecondPhoneNumber = model.SecondPhoneNumber
+                    }
+                };
+                IdentityResult result = await UserManager.CreateAsync(user);
 
                 if (result.Succeeded)
                     return RedirectToAction("Index");
@@ -118,8 +140,7 @@ namespace SaveMyHome.Areas.Admin.Controllers
                 IdentityResult result = await UserManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
-                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                    TempData["msg"] = $"{user.FirstName} был удален";
+                    TempData["msg"] = $"{user.Email} был удален";
                     return RedirectToAction("Index");
                 }
                 else
@@ -131,8 +152,8 @@ namespace SaveMyHome.Areas.Admin.Controllers
        
         #region Helpers
         private ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-        private ApplicationDbContext db => HttpContext.GetOwinContext().Get<ApplicationDbContext>();
         private IAuthenticationManager AuthenticationManager=> HttpContext.GetOwinContext().Authentication;
+
         private void AddErrorsFromResult(IdentityResult result)
         {
             foreach (string error in result.Errors)

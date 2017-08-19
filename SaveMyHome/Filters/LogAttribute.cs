@@ -1,5 +1,6 @@
 ﻿using SaveMyHome.Areas.Admin.Models;
-using SaveMyHome.Models;
+using SaveMyHome.DAL;
+using SaveMyHome.Infrastructure.Repository.Abstract;
 using System;
 using System.Web.Mvc;
 
@@ -7,6 +8,12 @@ namespace SaveMyHome.Filters
 {
     public class LogAttribute : ActionFilterAttribute
     {
+        IUnitOfWork Database;
+        public LogAttribute(IUnitOfWork database)
+        {
+            Database = database;
+        }
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var request = filterContext.HttpContext.Request;
@@ -19,12 +26,8 @@ namespace SaveMyHome.Filters
                 Date = DateTime.UtcNow
             };
 
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                db.Visitors.Add(visitor);
-                db.SaveChanges();
-            }
-
+            Database.Visitors.Add(visitor);
+            Database.Save();
             base.OnActionExecuting(filterContext);
         }
     }

@@ -10,11 +10,7 @@ namespace SaveMyHome.Models
     {
         #region Properties
         public int Id { get; set; }
-
-        [Display(Name = "Обнаружена: "), DataType(DataType.DateTime)]
         public DateTime Start { get; set; }
-
-        [Display(Name = "Устранена: "), DataType(DataType.DateTime)]
         public DateTime? End { get; set; }
         #endregion
 

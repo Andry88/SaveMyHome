@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SaveMyHome.Models
+namespace SaveMyHome.Helpers
 {
     public static class House
     {

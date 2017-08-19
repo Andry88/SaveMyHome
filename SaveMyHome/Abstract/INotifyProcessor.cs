@@ -5,6 +5,6 @@ namespace SaveMyHome.Abstract
 {
     public interface INotifyProcessor
     {
-        void ProcessNotify(Message message, IEnumerable<Apartment> apartments);
+        void ProcessNotify(Message message, IEnumerable<Apartment> apartments, string hostAddress);
     }
 }

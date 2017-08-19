@@ -15,11 +15,8 @@ namespace SaveMyHome.Models
     {
         #region Properties
         public int Id { get; set; }
-
         public ProblemStatus ProblemStatus { get; set; }
-
         public bool Notifier { get; set; }
-
         public bool Reacted { get; set; }
         #endregion
 

@@ -320,3 +320,13 @@ __pycache__/
 /SaveMyHome/AppRoles.resx
 /SaveMyHome/AppRoles.Designer.cs
 /SaveMyHome/ApplicationInsights.config
+/SaveMyHome/ViewModels/ManageViewModels.cs
+/SaveMyHome.Test/Properties/AssemblyInfo.cs
+/SaveMyHome.Test/app.config
+/SaveMyHome.Test/packages.config
+/SaveMyHome.Test/SaveMyHome.Test.csproj
+/SaveMyHome.Test/FloodControllerTests.cs
+/SaveMyHome.Tests/Properties
+/SaveMyHome.Tests/app.config
+/SaveMyHome.Tests/packages.config
+/SaveMyHome.Tests/SaveMyHome.Tests.csproj

@@ -5,6 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using static System.Net.WebRequestMethods;
 
 namespace SaveMyHome.Helpers
 {
@@ -26,7 +29,7 @@ namespace SaveMyHome.Helpers
             emailSettings = settings;
         }
 
-        public void ProcessNotify(Message message, IEnumerable<Apartment> apartments)
+        public void ProcessNotify(Message message, IEnumerable<Apartment> apartments, string hostAddress)
         {
             using (var smtpClient = new SmtpClient())
             {
@@ -35,20 +38,23 @@ namespace SaveMyHome.Helpers
                 smtpClient.Port = emailSettings.ServerPort;
                 smtpClient.UseDefaultCredentials = false;
                 smtpClient.Credentials = new NetworkCredential(emailSettings.Username, emailSettings.Password);
-
+                
                 //Текст email-сообщения
                 string body = new StringBuilder()
-                    .AppendLine($"{message.User.FullName}, кв №{message.User.ApartmentNumber}:")
-                    .AppendLine(message.Text)
-                    .AppendLine(message.Time.ToString())
+                    .AppendLine($"<div>{message.ClientProfile.FullName}, кв №{message.ClientProfile.ApartmentNumber}:<br/>")
+                    .AppendLine($"<b>{message.Text}</b></div>")
+                    .AppendLine($"<div>{message.Time.ToString()}</div>")
+                    .AppendLine()
+                    .AppendLine($"<div>Перейдите по <a href = 'http://{hostAddress}'>ссылке</a> " +
+                                $"для ответа на оповещение</div>")
                     .ToString();
 
                 //Список email-адресов для рассылки
-                IEnumerable<string> emails = apartments.SelectMany(a => a.Users.Select(u => u.Email));
+                List<string> emails = apartments.SelectMany(a => a.ClientProfiles.Select(u => u.ApplicationUser.Email)).ToList();
 
                 foreach (string mailToAddress in emails)
                     smtpClient.Send(new MailMessage(emailSettings.MailFromAddress,
-                                    mailToAddress, "Внимание!!!", body));
+                                    mailToAddress, "Внимание!!!", body) { IsBodyHtml = true });
             }
         }
     }

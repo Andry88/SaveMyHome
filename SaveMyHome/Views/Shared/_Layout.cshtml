@@ -19,20 +19,28 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul id="menu" class="nav navbar-nav">
-                    <li>@Html.ActionLink("Главная", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Главная", "Index", new { area = "", controller = "Home" })</li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Потоп <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Меня топят", "Notify", "Flood", 
-                               new { problemStatus = SaveMyHome.Models.ProblemStatus.Victim }, null)</li>
-                            <li>@Html.ActionLink("Я топлю", "Notify", "Flood", 
-                               new { problemStatus = SaveMyHome.Models.ProblemStatus.Culprit }, null)</li>
+                            <li>@Html.ActionLink("Меня топят", "Notify", new { area = "", controller = "Flood",
+                               problemStatus = SaveMyHome.Models.ProblemStatus.Victim }, null)</li>
+                            <li>@Html.ActionLink("Я топлю", "Notify", new { area = "", controller = "Flood",
+                               problemStatus = SaveMyHome.Models.ProblemStatus.Culprit }, null)</li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("Пожар", "Index", "Home")</li>
-                    <li>@Html.ActionLink("История проишествий", "ProblemHistory", "Problem")</li>
-                    <li>@Html.ActionLink("О доме", "GetPeople", "Home")</li>
-                    </ul>
+                    <li>@Html.ActionLink("Пожар", "Index", new { area="", controller = "Home" })</li>
+                    <li>@Html.ActionLink("История проишествий", "ProblemHistory", new { area = "", controller = "Problem" })</li>
+                    <li>@Html.ActionLink("О доме", "GetPeople", new { area = "", controller = "Home" })</li>
+                    @{var user = User;
+                        if (user.Identity.IsAuthenticated && user.IsInRole("admin"))
+                        {
+                            <li> 
+                                @Html.ActionLink("Панель администрирования", "Index", new { area = "Admin", controller = "Admin" }) 
+                            </li>
+                        }
+                   }
+               </ul>
             @Html.Partial("_LoginPartial")
         </div>
         </div>

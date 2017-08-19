@@ -4,7 +4,7 @@
     foreach (var answer in Model)
     {
         <div>
-            @answer.User.FullName, кв №@answer.User.ApartmentNumber:<br />
+            @answer.ClientProfile.FullName, кв №@answer.ClientProfile.ApartmentNumber:<br />
             <b>@answer.Text</b>
             <div>@answer.Time</div>
         </div>

@@ -61,6 +61,15 @@ namespace SaveMyHome {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Уважаемые соседи, в моей квартире произошла утечка воды. Проверьте, пожалуйста, нет ли следов затопления в Ваших квартирах!.
+        /// </summary>
+        internal static string CulpritHeadMessage {
+            get {
+                return ResourceManager.GetString("CulpritHeadMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         internal static string empty {
@@ -88,11 +97,11 @@ namespace SaveMyHome {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Уважаемые соседи, в моей квартире произошла утечка воды. Проверьте, пожалуйста, нет ли следов затопления в Ваших квартирах!.
+        ///   Looks up a localized string similar to Вы уже оповестили о потопе.
         /// </summary>
-        internal static string CulpritHeadMessage {
+        internal static string ForTheSameNotifierAtDontCompletedEvent {
             get {
-                return ResourceManager.GetString("CulpritHeadMessage", resourceCulture);
+                return ResourceManager.GetString("ForTheSameNotifierAtDontCompletedEvent", resourceCulture);
             }
         }
         
