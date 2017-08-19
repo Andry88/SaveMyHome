@@ -2,11 +2,9 @@
 using SaveMyHome.Infrastructure.Repository.Abstract;
 using SaveMyHome.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 
 namespace SaveMyHome.Infrastructure.Repository.Concret
 {

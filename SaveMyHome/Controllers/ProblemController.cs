@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNet.Identity.Owin;
-using SaveMyHome.Models;
-using System.Data.Entity;
+﻿using SaveMyHome.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using SaveMyHome.ViewModels;
-using SaveMyHome.Filters;
 using SaveMyHome.Infrastructure.Repository.Abstract;
 
 namespace SaveMyHome.Controllers

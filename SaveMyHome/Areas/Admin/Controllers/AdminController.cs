@@ -2,11 +2,9 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using SaveMyHome.DAL;
 using SaveMyHome.Infrastructure.Repository.Abstract;
 using SaveMyHome.Models;
 using SaveMyHome.ViewModels;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;

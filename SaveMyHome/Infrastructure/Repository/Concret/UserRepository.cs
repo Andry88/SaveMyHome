@@ -1,11 +1,8 @@
 ﻿using SaveMyHome.Infrastructure.Repository.Abstract;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using SaveMyHome.Models;
 using System.Linq.Expressions;
-using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using SaveMyHome.DAL;
 

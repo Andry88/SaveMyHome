@@ -1,20 +1,13 @@
 ﻿using AutoMapper;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using SaveMyHome.Filters;
 using SaveMyHome.Models;
 using SaveMyHome.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using PagedList;
-using Microsoft.Owin.Security;
-using System.Data.Entity;
 using SaveMyHome.Infrastructure.Repository.Abstract;
-using System.Linq.Expressions;
 
 namespace SaveMyHome.Controllers
 {

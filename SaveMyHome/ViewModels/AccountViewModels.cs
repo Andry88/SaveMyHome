@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Web;
 
 namespace SaveMyHome.ViewModels
 {
@@ -20,9 +19,6 @@ namespace SaveMyHome.ViewModels
     }
     public class RegisterViewModel
     {
-        //[Display(Name = "Логин"), Required(ErrorMessage = "Укажите Ваш логин")]
-        //public string UserName { get; set; }
-
         [Display(Name = "Пароль"), Required(ErrorMessage = "Введите пароль"), DataType(DataType.Password)]
         [StringLength(100, ErrorMessage = "{0} должен быть длиной минимум {2} символа.", MinimumLength = 6)]
         public string Password { get; set; }

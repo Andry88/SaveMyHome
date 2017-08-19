@@ -1,10 +1,6 @@
 ﻿using SaveMyHome.DAL;
 using SaveMyHome.Infrastructure.Repository.Abstract;
-using SaveMyHome.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace SaveMyHome.Infrastructure.Repository.Concret
 {
