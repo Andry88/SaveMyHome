@@ -117,7 +117,10 @@ namespace SaveMyHome.Areas.Admin.Controllers
                 {
                     IdentityResult result = await UserManager.UpdateAsync(user);
                     if (result.Succeeded)
+                    {
+                        TempData["msg"] = $"Пользователь {user.Email} был успешно добавлен";
                         return RedirectToAction("Index");
+                    }
                     else
                         AddErrorsFromResult(result);
                 }
@@ -138,7 +141,7 @@ namespace SaveMyHome.Areas.Admin.Controllers
                 IdentityResult result = await UserManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
-                    TempData["msg"] = $"{user.Email} был удален";
+                    TempData["msg"] = $"Пользователь {user.Email} был успешно удален";
                     return RedirectToAction("Index");
                 }
                 else

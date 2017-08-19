@@ -234,7 +234,7 @@ namespace SaveMyHome.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult Answer(AnswerVM model)
         {
             ClientProfile CurrentUserProfile = Database.ClientProfiles.CurrentUserProfile;

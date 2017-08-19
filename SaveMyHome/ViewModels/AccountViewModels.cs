@@ -10,11 +10,11 @@ namespace SaveMyHome.ViewModels
         [EmailAddress]
         public string Email { get; set; }
 
-        [Display(Name = "Password")]
+        [Display(Name = "Пароль")]
         [DataType(DataType.Password), Required]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Запомнить меня?")]
         public bool RememberMe { get; set; }
     }
     public class RegisterViewModel
