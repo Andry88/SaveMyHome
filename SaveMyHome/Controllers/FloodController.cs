@@ -13,7 +13,6 @@ using SaveMyHome.Filters;
 
 namespace SaveMyHome.Controllers
 {
-    [Authorize]
     public class FloodController : Controller
     {
         IUnitOfWork Database;
@@ -306,7 +305,7 @@ namespace SaveMyHome.Controllers
 
             TempData["msg"] = Resource.ProblemIsFixed;
 
-            return RedirectToAction("ProblemHistory", "Problem");
+            return RedirectToAction("ProblemHistory", "History");
         }
 
         #region ChildActions

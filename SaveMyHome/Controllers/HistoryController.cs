@@ -6,11 +6,10 @@ using SaveMyHome.Infrastructure.Repository.Abstract;
 
 namespace SaveMyHome.Controllers
 {
-    [Authorize]
-    public class ProblemController : Controller
+    public class HistoryController : Controller
     {
         IUnitOfWork Database;
-        public ProblemController(IUnitOfWork unitOfWork)
+        public HistoryController(IUnitOfWork unitOfWork)
         {
             this.Database = unitOfWork;
         }

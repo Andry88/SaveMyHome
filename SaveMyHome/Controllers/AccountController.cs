@@ -10,7 +10,6 @@ using SaveMyHome.ViewModels;
 
 namespace SaveMyHome.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

@@ -35,7 +35,7 @@
     </thead>
     <tbody class="well">
             @foreach (var p in Model)
-            {
+             {
                 <tr>
                     <td>@Html.ActionLink(p.FirstName, "Details", new { id = p.Id })</td>
                     <td>@Html.DisplayFor(model => p.LastName)</td>
@@ -44,7 +44,7 @@
                     <td>@Html.DisplayFor(model => p.SecondPhoneNumber)</td>
                     <td>@Html.DisplayFor(model => p.Email)</td>
                 </tr>
-            }
+             }
     </tbody>
 </table>
 @Recourses.HomeGetPeople.Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @Recourses.HomeGetPeople.From @Model.PageCount

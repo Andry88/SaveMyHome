@@ -39,7 +39,7 @@
                         </ul>
                     </li>
                     <li>@Html.ActionLink(Resources.Layout.Fire, "Index", new { area="", controller = "Home" })</li>
-                    <li>@Html.ActionLink(Resources.Layout.ProblemsHistory, "ProblemHistory", new { area = "", controller = "Problem" })</li>
+                    <li>@Html.ActionLink(Resources.Layout.ProblemsHistory, "ProblemHistory", new { area = "", controller = "History" })</li>
                     <li>@Html.ActionLink(Resources.Layout.AboutHouse, "GetPeople", new { area = "", controller = "Home" })</li>
                     @{var user = User;
                         if (user.Identity.IsAuthenticated && user.IsInRole("admin"))

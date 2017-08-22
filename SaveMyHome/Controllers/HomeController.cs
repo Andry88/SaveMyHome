@@ -13,7 +13,6 @@ using SaveMyHome.Filters;
 
 namespace SaveMyHome.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         IUnitOfWork Database;
@@ -114,26 +113,26 @@ namespace SaveMyHome.Controllers
             return View(model);
         }
 
-        public ActionResult ChangeCulture(string lang)
+        public RedirectResult ChangeCulture(string lang)
         {
             string returnUrl = Request.UrlReferrer.AbsolutePath;
             // Список культур
             List<string> cultures = new List<string>() { "ru", "en", "de" };
             if (!cultures.Contains(lang))
-            {
                 lang = "ru";
-            }
+            
             // Сохраняем выбранную культуру в куки
             HttpCookie cookie = Request.Cookies["lang"];
             if (cookie != null)
-                cookie.Value = lang;   // если куки уже установлено, то обновляем значение
+                cookie.Value = lang; // если куки уже установлено, то обновляем значение
             else
             {
-
-                cookie = new HttpCookie("lang");
-                cookie.HttpOnly = false;
-                cookie.Value = lang;
-                cookie.Expires = DateTime.Now.AddYears(1);
+                cookie = new HttpCookie("lang")
+                {
+                    HttpOnly = false,
+                    Value = lang,
+                    Expires = DateTime.Now.AddYears(1)
+                };
             }
             Response.Cookies.Add(cookie);
             return Redirect(returnUrl);
