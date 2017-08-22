@@ -1,7 +1,7 @@
 ﻿@model SaveMyHome.ViewModels.UserVM
 
 @{
-    ViewBag.Title = "Подробные сведения";
+    ViewBag.Title = Recourses.HomeDetails.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,7 +13,7 @@
         {
             <div class="pull-left" style="margin-right:20px">
                 <img class='img-thumbnail img-responsive' style='width:275px; height:350px;'
-                     src="data:@Model.ImageMimeType;base64,@Convert.ToBase64String(Model.ImageData)" alt="Фото" />
+                     src="data:@Model.ImageMimeType;base64,@Convert.ToBase64String(Model.ImageData)" alt="Photo" />
             </div>
         }
     </div>
@@ -38,4 +38,4 @@
         </table>
     </div>
 </div>
-    @Html.ActionLink("Назад к списку жильцов", "GetPeople", null, new { @class ="btn btn-primary"})
+    @Html.ActionLink(Recourses.HomeDetails.BackButton, "GetPeople", null, new { @class ="btn btn-primary"})

@@ -8,6 +8,8 @@ using System.Net;
 using System.Web.Mvc;
 using PagedList;
 using SaveMyHome.Infrastructure.Repository.Abstract;
+using System.Web;
+using SaveMyHome.Filters;
 
 namespace SaveMyHome.Controllers
 {
@@ -31,7 +33,7 @@ namespace SaveMyHome.Controllers
                 List<Reaction> reactions = null;
                 try
                 {
-                    reactions = Database.ClientProfiles.CurrentUserProfile.Apartment.Reactions.ToList();
+                    reactions = Database.ClientProfiles.CurrentClientProfile.Apartment.Reactions.ToList();
                 }
                 catch (NullReferenceException)
                 {
@@ -110,6 +112,31 @@ namespace SaveMyHome.Controllers
             UserVM model = Mapper.Map<ClientProfile, UserVM>(user);
 
             return View(model);
+        }
+
+        public ActionResult ChangeCulture(string lang)
+        {
+            string returnUrl = Request.UrlReferrer.AbsolutePath;
+            // Список культур
+            List<string> cultures = new List<string>() { "ru", "en", "de" };
+            if (!cultures.Contains(lang))
+            {
+                lang = "ru";
+            }
+            // Сохраняем выбранную культуру в куки
+            HttpCookie cookie = Request.Cookies["lang"];
+            if (cookie != null)
+                cookie.Value = lang;   // если куки уже установлено, то обновляем значение
+            else
+            {
+
+                cookie = new HttpCookie("lang");
+                cookie.HttpOnly = false;
+                cookie.Value = lang;
+                cookie.Expires = DateTime.Now.AddYears(1);
+            }
+            Response.Cookies.Add(cookie);
+            return Redirect(returnUrl);
         }
 
         protected override void Dispose(bool disposing)

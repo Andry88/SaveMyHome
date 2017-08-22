@@ -8,6 +8,8 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using SaveMyHome.Abstract;
 using SaveMyHome.Infrastructure.Repository.Abstract;
+using Resources;
+using SaveMyHome.Filters;
 
 namespace SaveMyHome.Controllers
 {
@@ -19,7 +21,7 @@ namespace SaveMyHome.Controllers
 
         public FloodController(IUnitOfWork unitOfWork, INotifyProcessor notifyProcessor)
         {
-            this.Database = unitOfWork;
+            Database = unitOfWork;
             this.notifyProcessor = notifyProcessor;
         }
 
@@ -39,7 +41,7 @@ namespace SaveMyHome.Controllers
         {
             string headMsg = null;
             
-            Apartment currApart = Database.ClientProfiles.CurrentUserProfile.Apartment;
+            Apartment currApart = Database.ClientProfiles.CurrentClientProfile.Apartment;
 
             //если житель одной и той же квартиры повторно оповещает о потопе,
             //выводится об этом сообщение
@@ -49,7 +51,7 @@ namespace SaveMyHome.Controllers
                 if (currApart.Reactions.Any(r => r.Notifier == true && isSecond == false
                 && r.EventId == currentRection.EventId && r.Event.End == null))
                 {
-                    TempData["msg"] = MessagesSource.ForTheSameNotifierAtDontCompletedEvent;
+                    TempData["msg"] = Resource.ForTheSameNotifierAtDontCompletedEvent;
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -60,10 +62,10 @@ namespace SaveMyHome.Controllers
                 //то создается сообщение по-умолчанию для виновника потопа,
                 //иначе выводится сообщение о невозможности затопления им каких-либо квартир
                 if (currApart.Floor != 1)
-                    headMsg = MessagesSource.CulpritHeadMessage;
+                    headMsg = Resource.CulpritHeadMessage;
                 else
                 {
-                    TempData["msg"] = MessagesSource.ForFirstFloorUser;
+                    TempData["msg"] = Resource.ForFirstFloorUser;
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -71,10 +73,10 @@ namespace SaveMyHome.Controllers
                    //то создается сообщение по-умолчанию для жертвы потопа,
                    //иначе выводится сообщение о невозможности затопления его кем-либо
                 if (currApart.Floor != House.FloorsCount)
-                    headMsg = MessagesSource.VictimHeadMessage;
+                    headMsg = Resource.VictimHeadMessage;
                 else
                 {
-                    TempData["msg"] = MessagesSource.ForLastFloorUser;
+                    TempData["msg"] = Resource.ForLastFloorUser;
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -98,7 +100,7 @@ namespace SaveMyHome.Controllers
         [ValidateAntiForgeryToken]
         public ViewResult Notify(NotifyVM model)
         {
-            ClientProfile CurrentUserProfile = Database.ClientProfiles.CurrentUserProfile;
+            ClientProfile CurrentUserProfile = Database.ClientProfiles.CurrentClientProfile;
             int lastReactionId = Database.Reactions.LastReactionId;
 
             //Проверка успешности валидации модели
@@ -234,10 +236,10 @@ namespace SaveMyHome.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Answer(AnswerVM model)
         {
-            ClientProfile CurrentUserProfile = Database.ClientProfiles.CurrentUserProfile;
+            ClientProfile CurrentUserProfile = Database.ClientProfiles.CurrentClientProfile;
 
             //Проверка успешности валидации модели
             if (ModelState.IsValid)
@@ -271,7 +273,7 @@ namespace SaveMyHome.Controllers
 
                     //иначе генерируется страница с сообщением текущего пользователя
                     //подтверждающая, что его сообщение отправлено
-                    TempData["msg"] = MessagesSource.MessageIsSent;
+                    TempData["msg"] = Resource.MessageIsSent;
 
                     return View("ReactionResult");
                 }
@@ -302,7 +304,7 @@ namespace SaveMyHome.Controllers
             currEvent.End = DateTime.Now;
             Database.Save();
 
-            TempData["msg"] = MessagesSource.ProblemIsFixed;
+            TempData["msg"] = Resource.ProblemIsFixed;
 
             return RedirectToAction("ProblemHistory", "Problem");
         }

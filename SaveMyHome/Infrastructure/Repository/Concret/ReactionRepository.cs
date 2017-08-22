@@ -61,7 +61,9 @@ namespace SaveMyHome.Infrastructure.Repository.Concret
         public Reaction CurrentReaction
         {
             get {
-                ApplicationUser currentUser = db.Users.Include(u => u.ClientProfile).FirstOrDefault(u => u.Email == HttpContext.Current.User.Identity.Name);
+                string currentUserName = HttpContext.Current.User.Identity.Name;
+                ApplicationUser currentUser = db.Users.Include(u => u.ClientProfile)
+                    .FirstOrDefault(u => u.Email == currentUserName);
                 return currentUser.ClientProfile.Apartment.Reactions.OrderByDescending(r => r.Id).FirstOrDefault(); 
             }
         }

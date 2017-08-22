@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Save my Home</title>
+    <title>@ViewBag.Title - @Resources.Layout.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -18,30 +18,40 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse">
-                <ul id="menu" class="nav navbar-nav">
-                    <li>@Html.ActionLink("Главная", "Index", new { area = "", controller = "Home" })</li>
+                <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Потоп <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">@Resources.Resource.ChooseLang <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Меня топят", "Notify", new { area = "", controller = "Flood",
+                            <li>@Html.ActionLink("Русский", "ChangeCulture", new { area = "", controller = "Home", lang = "ru" }, null)</li>
+                            <li>@Html.ActionLink("English", "ChangeCulture", new { area = "", controller = "Home", lang = "en" }, null)</li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul id="menu" class="nav navbar-nav">
+                    <li>@Html.ActionLink(Resources.Layout.Main, "Index", new { area = "", controller = "Home" })</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">@Resources.Layout.Flood <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink(Resources.Layout.FloodingMe, "Notify", new { area = "", controller = "Flood",
                                problemStatus = SaveMyHome.Models.ProblemStatus.Victim }, null)</li>
-                            <li>@Html.ActionLink("Я топлю", "Notify", new { area = "", controller = "Flood",
+                            <li>@Html.ActionLink(Resources.Layout.FloodingMe, "Notify", new { area = "", controller = "Flood",
                                problemStatus = SaveMyHome.Models.ProblemStatus.Culprit }, null)</li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("Пожар", "Index", new { area="", controller = "Home" })</li>
-                    <li>@Html.ActionLink("История проишествий", "ProblemHistory", new { area = "", controller = "Problem" })</li>
-                    <li>@Html.ActionLink("О доме", "GetPeople", new { area = "", controller = "Home" })</li>
+                    <li>@Html.ActionLink(Resources.Layout.Fire, "Index", new { area="", controller = "Home" })</li>
+                    <li>@Html.ActionLink(Resources.Layout.ProblemsHistory, "ProblemHistory", new { area = "", controller = "Problem" })</li>
+                    <li>@Html.ActionLink(Resources.Layout.AboutHouse, "GetPeople", new { area = "", controller = "Home" })</li>
                     @{var user = User;
                         if (user.Identity.IsAuthenticated && user.IsInRole("admin"))
                         {
                             <li> 
-                                @Html.ActionLink("Панель администрирования", "Index", new { area = "Admin", controller = "Admin" }) 
+                                @Html.ActionLink(Resources.Layout.AdminPanel, "Index", new { area = "Admin", controller = "Admin" }) 
                             </li>
                         }
-                   }
-               </ul>
+                     }
+                 </ul>
             @Html.Partial("_LoginPartial")
+                
         </div>
         </div>
     </div>
@@ -49,7 +59,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Save my Home</p>
+            <p>&copy; @DateTime.Now.Year - @Resources.Layout.Title</p>
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")

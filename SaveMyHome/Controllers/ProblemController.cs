@@ -25,8 +25,10 @@ namespace SaveMyHome.Controllers
                                               Name = e.Problem.Name,
                                               Start = e.Start,
                                               End = e.End,
-                                              Culprit = e.Reactions.FirstOrDefault(c => c.ProblemStatus == ProblemStatus.Culprit).ApartmentNumber,
-                                              Victims = e.Reactions.Where(a => a.ProblemStatus == ProblemStatus.Victim).OrderBy(a => a.ApartmentNumber)
+                                              Culprit = e.Reactions.FirstOrDefault(c => c.ProblemStatus == ProblemStatus.Culprit)
+                                                                   .ApartmentNumber,
+                                              Victims = e.Reactions.Where(a => a.ProblemStatus == ProblemStatus.Victim)
+                                                                   .OrderBy(a => a.ApartmentNumber)
                                                                    .Select(a => a.ApartmentNumber)
                                           });
 

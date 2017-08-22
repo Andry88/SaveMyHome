@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SaveMyHome {
+namespace Resources {
     using System;
     
     
@@ -19,27 +19,27 @@ namespace SaveMyHome {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class MessagesSource {
+    public class Resource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal MessagesSource() {
+        internal Resource() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SaveMyHome.MessagesSource", typeof(MessagesSource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SaveMyHome.Resources.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace SaveMyHome {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,9 +61,18 @@ namespace SaveMyHome {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите язык.
+        /// </summary>
+        public static string ChooseLang {
+            get {
+                return ResourceManager.GetString("ChooseLang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Уважаемые соседи, в моей квартире произошла утечка воды. Проверьте, пожалуйста, нет ли следов затопления в Ваших квартирах!.
         /// </summary>
-        internal static string CulpritHeadMessage {
+        public static string CulpritHeadMessage {
             get {
                 return ResourceManager.GetString("CulpritHeadMessage", resourceCulture);
             }
@@ -72,7 +81,7 @@ namespace SaveMyHome {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string empty {
+        public static string empty {
             get {
                 return ResourceManager.GetString("empty", resourceCulture);
             }
@@ -81,7 +90,7 @@ namespace SaveMyHome {
         /// <summary>
         ///   Looks up a localized string similar to Ваша квартира находится на 1-м этаже, поэтому вы не можете никого затопить!.
         /// </summary>
-        internal static string ForFirstFloorUser {
+        public static string ForFirstFloorUser {
             get {
                 return ResourceManager.GetString("ForFirstFloorUser", resourceCulture);
             }
@@ -90,7 +99,7 @@ namespace SaveMyHome {
         /// <summary>
         ///   Looks up a localized string similar to Ваша квартира находится на Последнем этаже, поэтому Вас никто не может затопить! Возможно, у Вас протекает крыша. Попробуйте обратиться в коммунальную службу!.
         /// </summary>
-        internal static string ForLastFloorUser {
+        public static string ForLastFloorUser {
             get {
                 return ResourceManager.GetString("ForLastFloorUser", resourceCulture);
             }
@@ -99,7 +108,7 @@ namespace SaveMyHome {
         /// <summary>
         ///   Looks up a localized string similar to Вы уже оповестили о потопе.
         /// </summary>
-        internal static string ForTheSameNotifierAtDontCompletedEvent {
+        public static string ForTheSameNotifierAtDontCompletedEvent {
             get {
                 return ResourceManager.GetString("ForTheSameNotifierAtDontCompletedEvent", resourceCulture);
             }
@@ -108,7 +117,7 @@ namespace SaveMyHome {
         /// <summary>
         ///   Looks up a localized string similar to Ваше сообщение успешно отправлено.
         /// </summary>
-        internal static string MessageIsSent {
+        public static string MessageIsSent {
             get {
                 return ResourceManager.GetString("MessageIsSent", resourceCulture);
             }
@@ -117,7 +126,7 @@ namespace SaveMyHome {
         /// <summary>
         ///   Looks up a localized string similar to Проблема зафиксирована.
         /// </summary>
-        internal static string ProblemIsFixed {
+        public static string ProblemIsFixed {
             get {
                 return ResourceManager.GetString("ProblemIsFixed", resourceCulture);
             }
@@ -126,7 +135,7 @@ namespace SaveMyHome {
         /// <summary>
         ///   Looks up a localized string similar to Уважаемые соседи, в моей квартире появились следы воды извне. Проверьте, пожалуйста, нет ли утечки воды в Ваших квартирах!.
         /// </summary>
-        internal static string VictimHeadMessage {
+        public static string VictimHeadMessage {
             get {
                 return ResourceManager.GetString("VictimHeadMessage", resourceCulture);
             }

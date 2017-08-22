@@ -18,8 +18,15 @@ namespace SaveMyHome.Infrastructure.Repository.Concret
             this.db = db;
         }
 
-        public ClientProfile CurrentUserProfile => db.ClientProfiles.Include(p => p.ApplicationUser)
-            .FirstOrDefault(u => u.ApplicationUser.Email == HttpContext.Current.User.Identity.Name);
+        public ClientProfile CurrentClientProfile
+        {
+            get
+            {
+                string currentUserName = HttpContext.Current.User.Identity.Name;
+                return db.ClientProfiles.Include(p => p.ApplicationUser)
+                .FirstOrDefault(u => u.ApplicationUser.Email == currentUserName);
+            }
+        }
 
         public IQueryable<ClientProfile> All => db.ClientProfiles;
 

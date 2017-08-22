@@ -9,6 +9,7 @@ namespace SaveMyHome
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new LogAttribute(new UnitOfWork()));
+            filters.Add(new CultureAttribute());
         }
     }
 }
