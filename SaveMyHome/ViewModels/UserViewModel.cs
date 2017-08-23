@@ -6,7 +6,7 @@ using System.Web.Mvc;
 namespace SaveMyHome.ViewModels
 {
     [DisplayName("Подробные сведения")]
-    public class UserVM
+    public class UserViewModel
     {
         [NotMapped, HiddenInput(DisplayValue = false)]
         public string Id { get; set; }

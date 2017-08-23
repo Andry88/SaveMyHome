@@ -123,6 +123,9 @@
   <data name="AdminPanel" xml:space="preserve">
     <value>Панель администрирования</value>
   </data>
+  <data name="ChooseLang" xml:space="preserve">
+    <value>Выбрать язык</value>
+  </data>
   <data name="Fire" xml:space="preserve">
     <value>Пожар</value>
   </data>

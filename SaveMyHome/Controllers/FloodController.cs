@@ -80,7 +80,7 @@ namespace SaveMyHome.Controllers
                 }
             }
 
-            return View(new NotifyVM
+            return View(new NotifyViewModel
             {
                 Apartments = GetApartmentsForNotification(currApart, problemStatus, Database.Reactions.LastReactionId, isSecond, 
                              Database.Apartments.AllIncluding(a => a.Reactions).ToList()),
@@ -97,7 +97,7 @@ namespace SaveMyHome.Controllers
         /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ViewResult Notify(NotifyVM model)
+        public ViewResult Notify(NotifyViewModel model)
         {
             ClientProfile CurrentUserProfile = Database.ClientProfiles.CurrentClientProfile;
             int lastReactionId = Database.Reactions.LastReactionId;
@@ -221,13 +221,13 @@ namespace SaveMyHome.Controllers
         public ViewResult Answer(ProblemStatus notifyStatus = ProblemStatus.None)
         {
             if (notifyStatus == ProblemStatus.PotentialCulprit)
-                return View("PotentialCulpritAnswer", new AnswerVM
+                return View("PotentialCulpritAnswer", new ViewModels.AnswerViewModel
                 {
                     VisitorProblemStatus = notifyStatus,
                     IsFromPotentialCulprit = true
                 });
             else 
-                return View("PotentialVictimAnswer", new AnswerVM
+                return View("PotentialVictimAnswer", new ViewModels.AnswerViewModel
                 {
                     VisitorProblemStatus = notifyStatus,
                     IsFromPotentialCulprit = false
@@ -236,7 +236,7 @@ namespace SaveMyHome.Controllers
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Answer(AnswerVM model)
+        public ActionResult Answer(ViewModels.AnswerViewModel model)
         {
             ClientProfile CurrentUserProfile = Database.ClientProfiles.CurrentClientProfile;
 

@@ -22,14 +22,14 @@ namespace Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Layout {
+    public class ProblemHistoryVM {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Layout() {
+        internal ProblemHistoryVM() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SaveMyHome.Resources.Layout", typeof(Layout).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SaveMyHome.Resources.ProblemHistoryVM", typeof(ProblemHistoryVM).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,92 +61,47 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to О доме.
+        ///   Looks up a localized string similar to Квартирa-виновник:.
         /// </summary>
-        public static string AboutHouse {
+        public static string ApartmentCulprit {
             get {
-                return ResourceManager.GetString("AboutHouse", resourceCulture);
+                return ResourceManager.GetString("ApartmentCulprit", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Панель администрирования.
+        ///   Looks up a localized string similar to Квартиры-жертвы:.
         /// </summary>
-        public static string AdminPanel {
+        public static string ApartmentsVictims {
             get {
-                return ResourceManager.GetString("AdminPanel", resourceCulture);
+                return ResourceManager.GetString("ApartmentsVictims", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Выбрать язык.
+        ///   Looks up a localized string similar to Обнаружена:.
         /// </summary>
-        public static string ChooseLang {
+        public static string Detected {
             get {
-                return ResourceManager.GetString("ChooseLang", resourceCulture);
+                return ResourceManager.GetString("Detected", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пожар.
+        ///   Looks up a localized string similar to Устранена:.
         /// </summary>
-        public static string Fire {
+        public static string Fixed {
             get {
-                return ResourceManager.GetString("Fire", resourceCulture);
+                return ResourceManager.GetString("Fixed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Потоп.
+        ///   Looks up a localized string similar to Проблема:.
         /// </summary>
-        public static string Flood {
+        public static string Name {
             get {
-                return ResourceManager.GetString("Flood", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Меня топят.
-        /// </summary>
-        public static string FloodingMe {
-            get {
-                return ResourceManager.GetString("FloodingMe", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Я топлю.
-        /// </summary>
-        public static string I_mFlooding {
-            get {
-                return ResourceManager.GetString("I\'mFlooding", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Главная.
-        /// </summary>
-        public static string Main {
-            get {
-                return ResourceManager.GetString("Main", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to История проишествий.
-        /// </summary>
-        public static string ProblemsHistory {
-            get {
-                return ResourceManager.GetString("ProblemsHistory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Сохрани свой дом.
-        /// </summary>
-        public static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
     }

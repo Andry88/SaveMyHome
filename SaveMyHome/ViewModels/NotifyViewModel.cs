@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SaveMyHome.ViewModels
 {
-    public class NotifyVM
+    public class NotifyViewModel
     {
         [Required(ErrorMessageResourceType = typeof(Resources.NotificationVM), ErrorMessageResourceName = "ApartmentsRequired")]
         public IList<int> Apartments { get; set; }

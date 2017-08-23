@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SaveMyHome.ViewModels
 {
-    public class AnswerVM
+    public class AnswerViewModel
     {
         public bool IsFromPotentialCulprit { get; set; }
         public IEnumerable<int> Apartments { get; set; }

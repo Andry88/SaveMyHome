@@ -17,6 +17,7 @@ namespace SaveMyHome.ViewModels
         [Display(Name = "Запомнить меня?")]
         public bool RememberMe { get; set; }
     }
+
     public class RegisterViewModel
     {
         [Display(Name = "Пароль"), Required(ErrorMessage = "Введите пароль"), DataType(DataType.Password)]
@@ -120,8 +121,6 @@ namespace SaveMyHome.ViewModels
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
-
-   
 
     public class ResetPasswordViewModel
     {

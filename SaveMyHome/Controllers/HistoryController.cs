@@ -19,7 +19,7 @@ namespace SaveMyHome.Controllers
             var problemHistory =
                 Database.Events.AllIncluding(p => p.Problem, r => r.Reactions)
                                           .Where(e => e.End != null)
-                                          .Select(e => new ProblemHistoryVM
+                                          .Select(e => new ProblemHistoryViewModel
                                           {
                                               Name = e.Problem.Name,
                                               Start = e.Start,

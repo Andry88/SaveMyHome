@@ -83,11 +83,11 @@ namespace SaveMyHome.Controllers
                     break;
             }
 
-            Mapper.Initialize(cfg => cfg.CreateMap<ClientProfile, UserVM>()
+            Mapper.Initialize(cfg => cfg.CreateMap<ClientProfile, UserViewModel>()
             .ForMember(vm => vm.Email, conf => conf.MapFrom(cp => cp.ApplicationUser.Email))
             .ForMember(vm => vm.PhoneNumber, conf => conf.MapFrom(cp => cp.ApplicationUser.PhoneNumber)));
             
-            var models = Mapper.Map<IQueryable<ClientProfile>, IEnumerable<UserVM>>(users);
+            var models = Mapper.Map<IQueryable<ClientProfile>, IEnumerable<UserViewModel>>(users);
 
             int pageSize = 12;
             int pageNumber = (page ?? 1);
@@ -105,10 +105,10 @@ namespace SaveMyHome.Controllers
             if(user == null)
                 return HttpNotFound();
             
-            Mapper.Initialize(cfg => cfg.CreateMap<ClientProfile, UserVM>()
+            Mapper.Initialize(cfg => cfg.CreateMap<ClientProfile, UserViewModel>()
             .ForMember(vm => vm.Email, conf => conf.MapFrom(cp => cp.ApplicationUser.Email))
             .ForMember(vm => vm.PhoneNumber, conf => conf.MapFrom(cp => cp.ApplicationUser.PhoneNumber)));
-            UserVM model = Mapper.Map<ClientProfile, UserVM>(user);
+            UserViewModel model = Mapper.Map<ClientProfile, UserViewModel>(user);
 
             return View(model);
         }

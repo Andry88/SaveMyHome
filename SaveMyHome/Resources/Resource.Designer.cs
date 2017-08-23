@@ -61,29 +61,11 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Выберите язык.
-        /// </summary>
-        public static string ChooseLang {
-            get {
-                return ResourceManager.GetString("ChooseLang", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Уважаемые соседи, в моей квартире произошла утечка воды. Проверьте, пожалуйста, нет ли следов затопления в Ваших квартирах!.
         /// </summary>
         public static string CulpritHeadMessage {
             get {
                 return ResourceManager.GetString("CulpritHeadMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string empty {
-            get {
-                return ResourceManager.GetString("empty", resourceCulture);
             }
         }
         
