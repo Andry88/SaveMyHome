@@ -6,14 +6,16 @@ namespace SaveMyHome.ViewModels
 {
     public class NotifyVM
     {
-        [Required(ErrorMessage = "Выберите как минимум одну квартиру для оповещения")]
+        [Required(ErrorMessageResourceType = typeof(Resources.NotificationVM), ErrorMessageResourceName = "ApartmentsRequired")]
         public IList<int> Apartments { get; set; }
 
         public ProblemStatus ProblemStatus { get; set; }
-        [Display(Name = "Отправить email")]
+
+        [Display(Name = "SendEmail", ResourceType = typeof(Resources.NotificationVM))]
         public bool SendEmail { get; set; }
 
-        [Display(Name = "Текст сообщения:"), Required(ErrorMessage = "Напишите сообщение")]
+        [Display(Name = "Text", ResourceType = typeof(Resources.NotificationVM))]
+        [Required(ErrorMessageResourceType = typeof(Resources.NotificationVM), ErrorMessageResourceName = "HeadMessageRequired")]
         public string HeadMessage { get; set; }
 
         public int ProblemId { get; set; }

@@ -22,14 +22,14 @@ namespace Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class HomeGetPeople {
+    public class NotificationVM {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal HomeGetPeople() {
+        internal NotificationVM() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SaveMyHome.Resources.HomeGetPeople", typeof(HomeGetPeople).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SaveMyHome.Resources.NotificationVM", typeof(NotificationVM).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,92 +61,38 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Номер квартиры.
+        ///   Looks up a localized string similar to Выберите как минимум одну квартиру для оповещения.
         /// </summary>
-        public static string ApartmentNumber {
+        public static string ApartmentsRequired {
             get {
-                return ResourceManager.GetString("ApartmentNumber", resourceCulture);
+                return ResourceManager.GetString("ApartmentsRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Найти.
+        ///   Looks up a localized string similar to Напишите сообщение.
         /// </summary>
-        public static string FindButton {
+        public static string HeadMessageRequired {
             get {
-                return ResourceManager.GetString("FindButton", resourceCulture);
+                return ResourceManager.GetString("HeadMessageRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Найти по имени:.
+        ///   Looks up a localized string similar to Отправить email.
         /// </summary>
-        public static string FindByName {
+        public static string SendEmail {
             get {
-                return ResourceManager.GetString("FindByName", resourceCulture);
+                return ResourceManager.GetString("SendEmail", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Имя.
+        ///   Looks up a localized string similar to Текст сообщения:.
         /// </summary>
-        public static string FirstName {
+        public static string Text {
             get {
-                return ResourceManager.GetString("FirstName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to из.
-        /// </summary>
-        public static string From {
-            get {
-                return ResourceManager.GetString("From", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Фамилия.
-        /// </summary>
-        public static string LastName {
-            get {
-                return ResourceManager.GetString("LastName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Страница.
-        /// </summary>
-        public static string Page {
-            get {
-                return ResourceManager.GetString("Page", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Номер телефона.
-        /// </summary>
-        public static string PhoneNumber {
-            get {
-                return ResourceManager.GetString("PhoneNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Дополнительный номер телефона.
-        /// </summary>
-        public static string SecondPhoneNumber {
-            get {
-                return ResourceManager.GetString("SecondPhoneNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Список жильцов.
-        /// </summary>
-        public static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("Text", resourceCulture);
             }
         }
     }

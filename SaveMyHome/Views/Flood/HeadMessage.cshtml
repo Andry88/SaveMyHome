@@ -1,7 +1,8 @@
 ﻿@model SaveMyHome.Models.Message
 
 <div>
-    @Model.ClientProfile.FullName, кв №@Model.ClientProfile.ApartmentNumber:<br />
+    @Model.ClientProfile.FullName, 
+    @Resources.HeadAndAnswerMessages.Apart №@Model.ClientProfile.ApartmentNumber:<br />
     <b>@Model.Text</b>
 </div>
 <div>@Model.Time</div>

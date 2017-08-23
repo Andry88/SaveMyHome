@@ -22,14 +22,14 @@ namespace Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class HomeDetails {
+    public class FloodNotify {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal HomeDetails() {
+        internal FloodNotify() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SaveMyHome.Resources.HomeDetails", typeof(HomeDetails).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SaveMyHome.Resources.FloodNotify", typeof(FloodNotify).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,29 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Назад.
+        ///   Looks up a localized string similar to Настройки оповещения.
         /// </summary>
-        public static string BackButton {
+        public static string NotificationSettings {
             get {
-                return ResourceManager.GetString("BackButton", resourceCulture);
+                return ResourceManager.GetString("NotificationSettings", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Подробные сведения.
+        ///   Looks up a localized string similar to Способы оповещения:.
         /// </summary>
-        public static string Title {
+        public static string NotificationWays {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("NotificationWays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Оповестить квартиры:.
+        /// </summary>
+        public static string NotifyApartments {
+            get {
+                return ResourceManager.GetString("NotifyApartments", resourceCulture);
             }
         }
     }

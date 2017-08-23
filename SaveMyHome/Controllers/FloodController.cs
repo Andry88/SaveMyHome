@@ -82,7 +82,7 @@ namespace SaveMyHome.Controllers
 
             return View(new NotifyVM
             {
-                Apartments = GetApartmentsForNotify(currApart, problemStatus, Database.Reactions.LastReactionId, isSecond, 
+                Apartments = GetApartmentsForNotification(currApart, problemStatus, Database.Reactions.LastReactionId, isSecond, 
                              Database.Apartments.AllIncluding(a => a.Reactions).ToList()),
                 ProblemStatus = problemStatus,
                 HeadMessage = headMsg,
@@ -204,7 +204,7 @@ namespace SaveMyHome.Controllers
             }
             else //если модель не прошла валидацию,
             {   //то в представление повторно отправляется список оповещаемых квартир
-                model.Apartments = GetApartmentsForNotify(CurrentUserProfile.Apartment, 
+                model.Apartments = GetApartmentsForNotification(CurrentUserProfile.Apartment, 
                     model.ProblemStatus, lastReactionId, model.IsSecondNotify, Database.Apartments.All.ToList());
                 return View(model);
             }
@@ -336,10 +336,10 @@ namespace SaveMyHome.Controllers
         #region Helpers
         //Генерирует квартиры для оповещения исходя из статуса оповещающего 
         //и потенциальной уязвимости к потопу из-за своего положения относительно квартиры оповещающего
-        public IList<int> GetApartmentsForNotify(Apartment currApart, ProblemStatus problemStatus, 
+        public IList<int> GetApartmentsForNotification(Apartment currApart, ProblemStatus problemStatus, 
             int lastReactionId, bool isSecond, List<Apartment> allApartments)
         {
-            var apartmentsForNotify = new List<int>();
+            var apartmentsForNotification = new List<int>();
 
             if (problemStatus == ProblemStatus.Culprit)
             {
@@ -356,7 +356,7 @@ namespace SaveMyHome.Controllers
                                  : !a.Reactions.Any(r => r.EventId == lastReactionId && !r.Reacted)))
                      .OrderBy(a => a.Number).Select(a => a.Number).ToList();
 
-                    apartmentsForNotify.AddRange(res);
+                    apartmentsForNotification.AddRange(res);
                 }
             }
             else {
@@ -369,10 +369,10 @@ namespace SaveMyHome.Controllers
                     .OrderBy(a => a.Number)
                     .Select(a => a.Number).ToList();
 
-                    apartmentsForNotify.AddRange(res);
+                    apartmentsForNotification.AddRange(res);
                 }
             }
-            return apartmentsForNotify;
+            return apartmentsForNotification;
         }
 
         //Получает из БД оповещенные квартиры

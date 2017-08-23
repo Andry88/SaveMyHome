@@ -2,13 +2,13 @@
 @model SaveMyHome.ViewModels.AnswerVM
 
 @{
-    ViewBag.Title = "Ответ потенциального виновника";
+    ViewBag.Title = Resources.PotentialCulpritAnswer.Title;
     Layout = "~/Views/Shared/_AnswerLayout.cshtml";
 }
 @Html.RadioButton("VisitorProblemStatus", @ProblemStatus.None, true, new { id = "PotentialCulprit" })
-<span>Это не я</span><br />
+<span>@Resources.PotentialCulpritAnswer.Ididnot</span><br />
 @Html.RadioButton("VisitorProblemStatus", @ProblemStatus.Culprit)
-<span>Это я</span>
+<span>@Resources.PotentialCulpritAnswer.Idid</span>
 
 @Html.HiddenFor(a => a.IsFromPotentialCulprit)
 @section scripts{

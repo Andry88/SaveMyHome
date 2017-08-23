@@ -12,7 +12,8 @@ namespace SaveMyHome.ViewModels
         
         public Message HeadMessage { get; set; }
 
-        [Display(Name = "Отправить сообщение:"), Required(ErrorMessage = "Введите сообщение")]
+        [Display(Name = "Text", ResourceType = typeof(Resources.AnswerViewModel))]
+        [Required(ErrorMessageResourceType = typeof(Resources.AnswerViewModel),ErrorMessageResourceName = "CurrAnswerRequired")]
         public string CurrAnswer { get; set; }
 
         public IEnumerable<Message> AnswersMessages { get; set; }

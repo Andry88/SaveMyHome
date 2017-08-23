@@ -15,28 +15,28 @@ namespace SaveMyHome.ViewModels
         [UIHint("EmailAddress")]
         public string Email { get; set; }
 
-        [Display(Name = "Имя")]
+        [Display(Name = "FirstName", ResourceType = typeof(Resources.UserVM))] 
         public string FirstName { get; set; }
 
-        [Display(Name = "Фамилия")]
+        [Display(Name = "LastName", ResourceType = typeof(Resources.UserVM))]
         public string LastName { get; set; }
 
-        [Display(Name = "Возраст")]
+        [Display(Name = "Age", ResourceType = typeof(Resources.UserVM))]
         public int Age { get; set; }
 
-        [Display(Name = "Номер квартиры")]
+        [Display(Name = "ApartmentNumber", ResourceType = typeof(Resources.UserVM))]
         public int ApartmentNumber { get; set; }
 
-        [Display(Name = "Tелефон")]
+        [Display(Name = "PhoneNumber", ResourceType = typeof(Resources.UserVM))]
         public string PhoneNumber { get; set; }
 
-        [Display(Name = "Дополнительный телефон")]
+        [Display(Name = "SecondPhoneNumber", ResourceType = typeof(Resources.UserVM))]
         public string SecondPhoneNumber { get; set; } 
 
-        [Display(Name = "Навыки и умения")]
+        [Display(Name = "Skills", ResourceType = typeof(Resources.UserVM))]
         public string Skills { get; set; } 
 
-        [Display(Name = "Увлечения")]
+        [Display(Name = "Hobbies", ResourceType = typeof(Resources.UserVM))]
         public string Hobbies { get; set; }
 
         [HiddenInput(DisplayValue = false)]
