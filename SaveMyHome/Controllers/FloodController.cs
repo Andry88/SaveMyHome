@@ -8,8 +8,6 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using SaveMyHome.Abstract;
 using SaveMyHome.Infrastructure.Repository.Abstract;
-using Resources;
-using SaveMyHome.Filters;
 
 namespace SaveMyHome.Controllers
 {
@@ -36,7 +34,7 @@ namespace SaveMyHome.Controllers
         /// <param name="apartmentsForNotify">Список оповещаемых квартир</param>
         /// <param name="isSecond">Флаг, указывающий является ли данное оповещение вторым в данном событии</param>
         /// <returns></returns>
-        public ActionResult Notify(ProblemStatus problemStatus, bool isSecond = false)
+        public ActionResult Notify(ProblemStatus problemStatus = ProblemStatus.PotentialCulprit, bool isSecond = false)
         {
             string headMsg = null;
             
@@ -50,7 +48,7 @@ namespace SaveMyHome.Controllers
                 if (currApart.Reactions.Any(r => r.Notifier == true && isSecond == false
                 && r.EventId == currentRection.EventId && r.Event.End == null))
                 {
-                    TempData["msg"] = Resource.ForTheSameNotifierAtDontCompletedEvent;
+                    TempData["msg"] = Resources.Resource.ForTheSameNotifierAtNotCompletedEvent;
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -61,10 +59,10 @@ namespace SaveMyHome.Controllers
                 //то создается сообщение по-умолчанию для виновника потопа,
                 //иначе выводится сообщение о невозможности затопления им каких-либо квартир
                 if (currApart.Floor != 1)
-                    headMsg = Resource.CulpritHeadMessage;
+                    headMsg = Resources.Resource.CulpritHeadMessage;
                 else
                 {
-                    TempData["msg"] = Resource.ForFirstFloorUser;
+                    TempData["msg"] = Resources.Resource.ForFirstFloorUser;
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -72,10 +70,10 @@ namespace SaveMyHome.Controllers
                    //то создается сообщение по-умолчанию для жертвы потопа,
                    //иначе выводится сообщение о невозможности затопления его кем-либо
                 if (currApart.Floor != House.FloorsCount)
-                    headMsg = Resource.VictimHeadMessage;
+                    headMsg = Resources.Resource.VictimHeadMessage;
                 else
                 {
-                    TempData["msg"] = Resource.ForLastFloorUser;
+                    TempData["msg"] = Resources.Resource.ForLastFloorUser;
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -235,8 +233,8 @@ namespace SaveMyHome.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public ActionResult Answer(ViewModels.AnswerViewModel model)
+        [ValidateAntiForgeryToken]
+        public ActionResult Answer(AnswerViewModel model)
         {
             ClientProfile CurrentUserProfile = Database.ClientProfiles.CurrentClientProfile;
 
@@ -272,7 +270,7 @@ namespace SaveMyHome.Controllers
 
                     //иначе генерируется страница с сообщением текущего пользователя
                     //подтверждающая, что его сообщение отправлено
-                    TempData["msg"] = Resource.MessageIsSent;
+                    TempData["msg"] = Resources.Resource.MessageWasSent;
 
                     return View("ReactionResult");
                 }
@@ -303,7 +301,7 @@ namespace SaveMyHome.Controllers
             currEvent.End = DateTime.Now;
             Database.Save();
 
-            TempData["msg"] = Resource.ProblemIsFixed;
+            TempData["msg"] = Resources.Resource.ProblemWasFixed;
 
             return RedirectToAction("ProblemHistory", "History");
         }
@@ -336,7 +334,7 @@ namespace SaveMyHome.Controllers
         #region Helpers
         //Генерирует квартиры для оповещения исходя из статуса оповещающего 
         //и потенциальной уязвимости к потопу из-за своего положения относительно квартиры оповещающего
-        public IList<int> GetApartmentsForNotification(Apartment currApart, ProblemStatus problemStatus, 
+        internal IList<int> GetApartmentsForNotification(Apartment currApart, ProblemStatus problemStatus, 
             int lastReactionId, bool isSecond, List<Apartment> allApartments)
         {
             var apartmentsForNotification = new List<int>();
@@ -354,7 +352,7 @@ namespace SaveMyHome.Controllers
                      || isSecond ? !a.Reactions.Any(r => r.EventId == lastReactionId && r.Reacted)
                                  //Позволяет получить для оповещения квартиры, участвовавшие в прошлых уже завершенных событиях
                                  : !a.Reactions.Any(r => r.EventId == lastReactionId && !r.Reacted)))
-                     .OrderBy(a => a.Number).Select(a => a.Number).ToList();
+                     .OrderBy(a => a.Number).Select(a =>a.Number).ToList();
 
                     apartmentsForNotification.AddRange(res);
                 }
@@ -366,8 +364,7 @@ namespace SaveMyHome.Controllers
                     a.Number >= (currApart.Number + House.ApartmentsWithinFloor * i - House.AlertRangeHorizontal)
                     && a.Number <= (currApart.Number + House.ApartmentsWithinFloor * i + House.AlertRangeHorizontal)
                     && a.Floor == currApart.Floor + i)
-                    .OrderBy(a => a.Number)
-                    .Select(a => a.Number).ToList();
+                    .OrderBy(a => a.Number).Select(a => a.Number).ToList();
 
                     apartmentsForNotification.AddRange(res);
                 }

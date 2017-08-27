@@ -1,7 +1,7 @@
 ﻿@model SaveMyHome.ViewModels.UserViewModel
-
+@using Resources
 @{
-    ViewBag.Title = Resources.HomeDetails.Title;
+    ViewBag.Title = HomeDetails.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -38,4 +38,4 @@
         </table>
     </div>
 </div>
-    @Html.ActionLink(Resources.HomeDetails.BackButton, "GetPeople", null, new { @class ="btn btn-primary"})
+    @Html.ActionLink(HomeDetails.BackButton, "GetPeople", null, new { @class ="btn btn-primary"})

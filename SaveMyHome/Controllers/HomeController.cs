@@ -9,7 +9,6 @@ using System.Web.Mvc;
 using PagedList;
 using SaveMyHome.Infrastructure.Repository.Abstract;
 using System.Web;
-using SaveMyHome.Filters;
 
 namespace SaveMyHome.Controllers
 {

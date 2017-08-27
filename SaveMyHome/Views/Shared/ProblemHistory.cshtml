@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<SaveMyHome.ViewModels.ProblemHistoryViewModel>
+    @using Resources
 @{
-    ViewBag.Title = Resources.ProblemHistory.Title;
+    ViewBag.Title = ProblemHistory.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -16,7 +17,7 @@
     <div class="panel panel-body">
         @if (Model.Count() == 0)
         {
-            <h2 class="text-center">@Resources.ProblemHistory.NoProblem</h2>
+            <h2 class="text-center">@ProblemHistory.NoProblem</h2>
         }
         else
         {
@@ -53,7 +54,7 @@
                             }
                             else
                             {
-                                <td>@Resources.ProblemHistory.NoVictims</td>
+                                <td>@ProblemHistory.NoVictims</td>
                             }
                         </tr>
                     }
@@ -63,6 +64,6 @@
         
     </div>
    <div class="panel panel-footer">
-       @Html.ActionLink(Resources.ProblemHistory.ExitButton, "Index","Home", null, new { @class = "btn btn-default" })
+       @Html.ActionLink(ProblemHistory.ExitButton, "Index","Home", null, new { @class = "btn btn-default" })
    </div>
 </div>

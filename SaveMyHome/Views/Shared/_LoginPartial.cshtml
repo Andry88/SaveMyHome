@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Resources
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", new { area =""}, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -7,16 +8,16 @@
 
     <ul class="nav navbar-nav">
         <li>
-            @Html.ActionLink($"{Resources.LoginPartial.Hello} {User.Identity.GetUserName()}!", "Index", new { area = "", controller = "Manage", title = "Manage" })
+            @Html.ActionLink($"{LoginPartial.Hello} {User.Identity.GetUserName()}!", "Index", new { area = "", controller = "Manage", title = "Manage" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">@Resources.LoginPartial.Logoff</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">@LoginPartial.Logoff</a></li>
     </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink(Resources.LoginPartial.Register, "Register", new { area = "", controller = "Account", id = "registerLink" })</li>
-        <li>@Html.ActionLink(Resources.LoginPartial.Login, "Login", new { area = "", controller = "Account", id = "loginLink" })</li>
+        <li>@Html.ActionLink(LoginPartial.Register, "Register", new { area = "", controller = "Account", id = "registerLink" })</li>
+        <li>@Html.ActionLink(LoginPartial.Login, "Login", new { area = "", controller = "Account", id = "loginLink" })</li>
     </ul>
 }

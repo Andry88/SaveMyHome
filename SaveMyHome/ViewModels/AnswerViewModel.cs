@@ -1,6 +1,7 @@
 ﻿using SaveMyHome.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Resources;
 
 namespace SaveMyHome.ViewModels
 {
@@ -12,8 +13,8 @@ namespace SaveMyHome.ViewModels
         
         public Message HeadMessage { get; set; }
 
-        [Display(Name = "Text", ResourceType = typeof(Resources.AnswerViewModel))]
-        [Required(ErrorMessageResourceType = typeof(Resources.AnswerViewModel),ErrorMessageResourceName = "CurrAnswerRequired")]
+        [Display(Name = "Text", ResourceType = typeof(AnswerVM))]
+        [Required(ErrorMessageResourceType = typeof(AnswerVM), ErrorMessageResourceName = "CurrAnswerRequired")]
         public string CurrAnswer { get; set; }
 
         public IEnumerable<Message> AnswersMessages { get; set; }

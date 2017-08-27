@@ -1,11 +1,12 @@
 ﻿@model SaveMyHome.ViewModels.NotifyViewModel
-
+@using SaveMyHome.Helpers 
+@using SaveMyHome.Models 
+@using Resources
 @{
-    ViewBag.Title = Resources.FloodNotify.NotificationSettings;
+    ViewBag.Title = FloodNotify.NotificationSettings;
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
-    int apartment;
 }
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -14,13 +15,17 @@
         <div class="panel panel-body">
             <div class="form-group">
                 <fieldset>
-                    <legend>@Resources.FloodNotify.NotifyApartments</legend>
-                    <div>
-                        @for (int i = 0; i < Model.Apartments.Count; i++)
+                    <legend>@FloodNotify.NotifyApartments</legend>
+                    <div> 
+                        @foreach (var floor in House.GetFloorsByApartments(Model.Apartments)) 
                         {
-                            apartment = Model.Apartments[i];
-                            <label>@apartment</label>
-                            <input type="checkbox" name="Apartments" value="@apartment" checked>
+                          var apartments = House.GetApartmentsByFloor(Model.Apartments, floor);
+                            <div>@floor @FloorSchema.Floor</div>
+                            for (int i = 0; i < apartments.Count; i++)
+                            {
+                                <label>@apartments[i]</label>
+                                <input type="checkbox" name="Apartments" value="@apartments[i]" checked>
+                            }
                         }
                    <div>@Html.ValidationMessageFor(m => m.Apartments)</div>
                         @Html.HiddenFor(m => m.ProblemStatus)
@@ -31,7 +36,7 @@
                 </div>
                 <div class="form-group">
                     <fieldset>
-                        <legend>@Resources.FloodNotify.NotificationWays</legend>
+                        <legend>@FloodNotify.NotificationWays</legend>
                         <div>@Html.LabelFor(m => m.SendEmail)
                         @Html.CheckBoxFor(m => m.SendEmail, new { @class = "checkbox-inline" })</div>
                     </fieldset>

@@ -1,9 +1,9 @@
 ﻿@model PagedList.IPagedList<SaveMyHome.ViewModels.UserViewModel>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-
+@using Resources 
 @{
-    ViewBag.Title = Resources.HomeGetPeople.Title;
+    ViewBag.Title = HomeGetPeople.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,10 +11,10 @@
 @using (Html.BeginForm("GetPeople", "Home", FormMethod.Get, new { @class = "form-inline" }))
 {
     <div class="form-group">
-        <label class="control-label" for="SearchString">@Resources.HomeGetPeople.FindByName</label>
+        <label class="control-label" for="SearchString">@HomeGetPeople.FindByName</label>
          @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class="form-control" })
         <button type="submit" class="btn btn-default">
-            <span class="glyphicon glyphicon-search"></span>@Resources.HomeGetPeople.FindButton
+            <span class="glyphicon glyphicon-search"></span>@HomeGetPeople.FindButton
         </button> 
     </div>
 }
@@ -22,13 +22,13 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>@Resources.HomeGetPeople.FirstName</th>
-            <th>@Html.ActionLink(Resources.HomeGetPeople.LastName, "GetPeople", 
+            <th>@HomeGetPeople.FirstName</th>
+            <th>@Html.ActionLink(HomeGetPeople.LastName, "GetPeople", 
                new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })</th>
-            <th>@Html.ActionLink(Resources.HomeGetPeople.ApartmentNumber, "GetPeople", 
+            <th>@Html.ActionLink(HomeGetPeople.ApartmentNumber, "GetPeople", 
                new { sortOrder = ViewBag.ApartSortParm, currentFilter = ViewBag.CurrentFilter })</th>
-            <th>@Resources.HomeGetPeople.PhoneNumber</th>
-            <th>@Resources.HomeGetPeople.SecondPhoneNumber</th>
+            <th>@HomeGetPeople.PhoneNumber</th>
+            <th>@HomeGetPeople.SecondPhoneNumber</th>
             <th>Email</th>
             <th></th>
         </tr>
@@ -47,7 +47,7 @@
              }
     </tbody>
 </table>
-@Resources.HomeGetPeople.Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @Resources.HomeGetPeople.From @Model.PageCount
+@HomeGetPeople.Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @HomeGetPeople.From @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("GetPeople",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

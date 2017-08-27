@@ -1,6 +1,6 @@
-﻿
+﻿@using Resources
 @{
-    ViewBag.Title = "Панель администрирования";
+    ViewBag.Title = Resources.Layout.AdminPanel;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @if (TempData["msg"] != null)
@@ -12,6 +12,6 @@
 
 <H2>@ViewBag.Title</H2>
 <div class="list-group">
-    @Html.ActionLink("История посещений", "Log", null, new { @class = "list-group-item" }) <br />
-    @Html.ActionLink("Учетные данные пользователей", "Accounts", null, new { @class = "list-group-item" })
+    @Html.ActionLink(Account.VisitHistory, "Log", null, new { @class = "list-group-item" }) <br />
+    @Html.ActionLink(Account.Credentials, "Accounts", null, new { @class = "list-group-item" })
 </div>

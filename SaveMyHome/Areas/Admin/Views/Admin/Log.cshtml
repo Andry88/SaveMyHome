@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<SaveMyHome.Areas.Admin.Models.Visitor>
 
 @{
-    ViewBag.Title = "История посещений";
+    ViewBag.Title = Resources.Account.VisitHistory;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,36 +9,20 @@
 
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Login)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ip)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Url)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
+        <th>@Html.DisplayNameFor(model => model.Login)</th>
+        <th>@Html.DisplayNameFor(model => model.Ip)</th>
+        <th>@Html.DisplayNameFor(model => model.Url)</th>
+        <th>@Html.DisplayNameFor(model => model.Date)</th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Login)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ip)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Url)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
+            <td>@Html.DisplayFor(modelItem => item.Login)</td>
+            <td>@Html.DisplayFor(modelItem => item.Ip)</td>
+            <td>@Html.DisplayFor(modelItem => item.Url)</td>
+            <td>@Html.DisplayFor(modelItem => item.Date)</td>
         </tr>
     }
 

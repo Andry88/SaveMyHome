@@ -19,7 +19,7 @@ namespace SaveMyHome.Models
         #endregion
 
         #region Methods
-        [Display(Name = "Этаж")]
+        [Display(Name = "Floor", ResourceType = typeof(Resources.FloorSchema))]
         public int Floor => (int)Math.Ceiling((decimal)Number / House.ApartmentsAmount * House.FloorsCount);
         #endregion
     }

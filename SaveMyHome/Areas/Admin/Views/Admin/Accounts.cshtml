@@ -1,8 +1,9 @@
 ﻿@using SaveMyHome.Models
+@using Resources 
 @model IEnumerable<ApplicationUser>
 
 @{
-    ViewBag.Title = "Учетные записи";
+    ViewBag.Title = Account.Accounts;
 }
 
 <div class="panel panel-primary">
@@ -10,14 +11,14 @@
     <table class="table table-striped">
         <tr>
             <th>Id</th>
-            <th>Логин</th>
+            <th>@Account.Login</th>
             <th>Email</th>
             <th></th>
         </tr>
         @if (Model.Count() == 0)
         {
             <tr>
-                <td colspan="4" class="text-center">Нет ни одной учетной записи</td>
+                <td colspan="4" class="text-center">@Account.NoAccounts</td>
             </tr>
         }
         else
@@ -32,9 +33,9 @@
                         @using (Html.BeginForm("Delete", "Admin", new { id = user.Id }))
                         {
                             @Html.AntiForgeryToken()
-                            @Html.ActionLink("Изменить", "Edit", "Admin", new { id = user.Id },
+                            @Html.ActionLink(Account.Edit, "Edit", new { area = "", controller = "Account", id = user.Id },
                             new { @class = "btn btn-primary btn-xs", style = "float: left; margin-right: 10px" })
-                            <button class="btn btn-danger btn-xs" type="submit">Удалить</button>
+                            <button class="btn btn-danger btn-xs" type="submit">@Account.Delete</button>
                         }
                     </td>
                 </tr>
@@ -42,4 +43,4 @@
         }
     </table>
 </div>
-@Html.ActionLink("Создать", "Create", null, new { @class = "btn btn-primary" })
+@Html.ActionLink(Account.CreateAccount, "Register", new { area = "", controller = "Account" }, new { @class = "btn btn-primary" })

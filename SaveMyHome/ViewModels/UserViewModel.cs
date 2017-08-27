@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Mvc;
+using Resources;
 
 namespace SaveMyHome.ViewModels
 {
@@ -15,28 +16,28 @@ namespace SaveMyHome.ViewModels
         [UIHint("EmailAddress")]
         public string Email { get; set; }
 
-        [Display(Name = "FirstName", ResourceType = typeof(Resources.UserVM))] 
+        [Display(Name = "FirstName", ResourceType = typeof(UserVM))] 
         public string FirstName { get; set; }
 
-        [Display(Name = "LastName", ResourceType = typeof(Resources.UserVM))]
+        [Display(Name = "LastName", ResourceType = typeof(UserVM))]
         public string LastName { get; set; }
 
-        [Display(Name = "Age", ResourceType = typeof(Resources.UserVM))]
+        [Display(Name = "Age", ResourceType = typeof(UserVM))]
         public int Age { get; set; }
 
-        [Display(Name = "ApartmentNumber", ResourceType = typeof(Resources.UserVM))]
+        [Display(Name = "ApartmentNumber", ResourceType = typeof(UserVM))]
         public int ApartmentNumber { get; set; }
 
-        [Display(Name = "PhoneNumber", ResourceType = typeof(Resources.UserVM))]
+        [Display(Name = "PhoneNumber", ResourceType = typeof(UserVM))]
         public string PhoneNumber { get; set; }
 
-        [Display(Name = "SecondPhoneNumber", ResourceType = typeof(Resources.UserVM))]
+        [Display(Name = "SecondPhoneNumber", ResourceType = typeof(UserVM))]
         public string SecondPhoneNumber { get; set; } 
 
-        [Display(Name = "Skills", ResourceType = typeof(Resources.UserVM))]
+        [Display(Name = "Skills", ResourceType = typeof(UserVM))]
         public string Skills { get; set; } 
 
-        [Display(Name = "Hobbies", ResourceType = typeof(Resources.UserVM))]
+        [Display(Name = "Hobbies", ResourceType = typeof(UserVM))]
         public string Hobbies { get; set; }
 
         [HiddenInput(DisplayValue = false)]

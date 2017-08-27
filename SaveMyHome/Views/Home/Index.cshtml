@@ -1,6 +1,7 @@
 ﻿@using SaveMyHome.Models
+@using Resources 
 @{
-    ViewBag.Title = Resources.HomeIndex.Title;
+    ViewBag.Title = HomeIndex.Title;
 }
 @if (TempData["msg"] != null)
 {
@@ -9,14 +10,14 @@
     </div>
 }
 <div class="jumbotron">
-    <p class="lead">@Resources.HomeIndex.Text</p>
+    <p class="lead">@HomeIndex.Text</p>
 </div>
 
 @if (ViewBag.ProblemStatus == ProblemStatus.PotentialCulprit ||
      ViewBag.ProblemStatus == ProblemStatus.PotentialVictim)
 {
     <div class="col-md-offset-5">
-        @Html.ActionLink(Resources.HomeIndex.Attention, "Answer", "Flood", 
+        @Html.ActionLink(HomeIndex.Attention, "Answer", "Flood", 
        new { notifyStatus = ViewBag.ProblemStatus }, 
        new { @class = "btn btn-lg btn-danger"})
     </div>

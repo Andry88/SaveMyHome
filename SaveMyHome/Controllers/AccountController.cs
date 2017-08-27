@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SaveMyHome.Models;
 using SaveMyHome.ViewModels;
+using Resources;
 
 namespace SaveMyHome.Controllers
 {
@@ -118,33 +119,36 @@ namespace SaveMyHome.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, AppRoles.User);
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await UserManager.AddToRoleAsync(user.Id, Roles.User);
+                    if (User.IsInRole(Roles.User))
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                        return RedirectToAction("Accounts", new { area = "Admin", controller = "Admin" });
                 }
                 AddErrors(result);
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
-        public async Task<ActionResult> Edit()
+        public async Task<ActionResult> Edit(string id)
         {
-            ApplicationUser user = await UserManager.FindByEmailAsync(User.Identity.Name);
+            ApplicationUser user = await UserManager.FindByIdAsync(id);
             if (user != null)
             {
-                return View(new EditAccountVM
+                return View(new EditAccountViewModel
                 {
                     Email = user.Email,
-                    //UserName = user.UserName,
                     PhoneNumber = user.PhoneNumber,
                     Age = user.ClientProfile.Age,
                     ApartmentNumber = user.ClientProfile.ApartmentNumber,
@@ -158,13 +162,19 @@ namespace SaveMyHome.Controllers
                 });
             }
             else
-                return RedirectToAction("Index","Home");
+            {
+                if (User.IsInRole(Roles.User))
+                    return RedirectToAction("Index", "Home");
+                else
+                    return RedirectToAction("Accounts", new { area = "Admin", controller = "Admin" });
+            }
         }
 
         [HttpPost]
-        public async Task<ActionResult> Edit(EditAccountVM model, HttpPostedFileBase Image = null)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(EditAccountViewModel model, HttpPostedFileBase Image = null)
         {
-            ApplicationUser user = await UserManager.FindByEmailAsync(User.Identity.Name);
+            ApplicationUser user = await UserManager.FindByIdAsync(model.Id);
             if (user != null)
             {
                 user.Email = model.Email;
@@ -185,8 +195,7 @@ namespace SaveMyHome.Controllers
                     Image.InputStream.Read(user.ClientProfile.ImageData, 0, Image.ContentLength);
                 }
 
-                IdentityResult validEmail
-                    = await UserManager.UserValidator.ValidateAsync(user);
+                IdentityResult validEmail = await UserManager.UserValidator.ValidateAsync(user);
 
                 if (!validEmail.Succeeded)
                     AddErrorsFromResult(validEmail);
@@ -207,7 +216,12 @@ namespace SaveMyHome.Controllers
                 {
                     IdentityResult result = await UserManager.UpdateAsync(user);
                     if (result.Succeeded)
-                        return RedirectToAction("Index", "Home");
+                    {
+                        if (User.IsInRole(Roles.User))
+                            return RedirectToAction("Index", "Home");
+                        else
+                            return RedirectToAction("Accounts", new { area = "Admin", controller = "Admin" });
+                    }
                     else
                         AddErrorsFromResult(result);
                 }

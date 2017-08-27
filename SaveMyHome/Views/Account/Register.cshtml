@@ -1,62 +1,17 @@
 ﻿@model SaveMyHome.ViewModels.RegisterViewModel
+@using Resources
+
 @{
-    ViewBag.Title = "Регистрация пользователя";
+    ViewBag.Title = Account.Register;
 }
+ <h4>@Account.CreateAccount</h4><hr/>
 
-<h2>@ViewBag.Title</h2>
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using(Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Создать аккаунт</h4>
-    <hr />
+    
     <div class="form-horizontal">
-        @Html.ValidationSummary(false)
-
-        @foreach (var p in ViewData.ModelMetadata.Properties)
-        {
-            switch (p.PropertyName)
-            {
-                case "Id":
-                case "ImageData":
-                case "ImageMimeType":
-                    break;
-                default:
-                    <div class="form-group">
-                        <label class="control-label col-md-2">@(p.DisplayName ?? p.PropertyName)</label>
-                        <div class="col-md-10">
-                            @Html.Editor(p.PropertyName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessage(p.PropertyName, new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    break;
-            }
-        }
-
-        <!-- #region Добавление фото -->
-        <div class="form-group">
-            <div style="position:relative">
-                <label>Фото</label>
-                <a class="btn" href="javascript:;">
-                    Поиск файла...
-                    <input type="file" name="Image" size="40" style="position:absolute; z-index:2;
-                                top:0;left:0; filter: alpha(opacity=0); opacity:0;
-                                background-color:transparent; color:transparent;"
-                           onchange='$("#upload-file-info").html($(this).val());' />
-                </a>
-                <span class="label label-info" id="upload-file-info"></span>
-            </div>
-            @if (Model.ImageData == null)
-            {
-                <div class="form-control-static">Нет фото</div>
-            }
-            else
-            {
-                <img class='img-thumbnail' style='width:150px; height:150px;'
-                     src="data:@Model.ImageMimeType;base64,@Convert.ToBase64String(Model.ImageData)" />
-            }
-        </div>
-        <!-- #endregion -->
+        @Html.Partial("_RegisterEditPartial", Model)
 
         <button type="submit" class="btn btn-primary">Сохранить</button>
         @Html.ActionLink("Отмена", "Index", "Home", null, new { @class = "btn btn-default" })

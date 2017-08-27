@@ -1,18 +1,19 @@
 ﻿@model IEnumerable<string>
+@using Resources 
 @{
-    ViewBag.Title = "Ошибка";
+    ViewBag.Title = Error._Error;
 }
 <div class="alert alert-danger">
     @switch (Model.Count())
     {
         case 0:
-            @: Что-то пошло не так. Пожалуйста, попробуйте еще раз!
+            @: @Error.TryOnceAgain
             break;
         case 1:
             @Model.First();
             break;
         default:
-            @: Следующие ошибки были обнаружены:
+            @: @Error.FollowingErrorsWereDetected:
             <ul>
                 @foreach (string error in Model)
                 {

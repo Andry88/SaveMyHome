@@ -32,9 +32,9 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">@Resources.Layout.Flood <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink(Resources.Layout.FloodingMe, "Notify", new { area = "", controller = "Flood",
+                            <li>@Html.ActionLink(Resources.Layout.YouAreFlooded, "Notify", new { area = "", controller = "Flood",
                                problemStatus = SaveMyHome.Models.ProblemStatus.Victim }, null)</li>
-                            <li>@Html.ActionLink(Resources.Layout.I_mFlooding, "Notify", new { area = "", controller = "Flood",
+                            <li>@Html.ActionLink(Resources.Layout.YouAreFlooding, "Notify", new { area = "", controller = "Flood",
                                problemStatus = SaveMyHome.Models.ProblemStatus.Culprit }, null)</li>
                         </ul>
                     </li>
@@ -51,7 +51,6 @@
                      }
                  </ul>
             @Html.Partial("_LoginPartial")
-                
         </div>
         </div>
     </div>

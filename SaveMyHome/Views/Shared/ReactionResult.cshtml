@@ -1,6 +1,7 @@
 ﻿@model SaveMyHome.ViewModels.AnswerViewModel
+@using Resources
 @{
-    ViewBag.Title = Resources.ReactionResult.Title;
+    ViewBag.Title = ReactionResult.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -23,4 +24,4 @@
     @Html.Action("AnswerMessages")
 </div>
 
-    @Html.ActionLink(Resources.ReactionResult.LeavePageButton, "Index", "Home", null, new { @class = "btn btn-success" })
+    @Html.ActionLink(ReactionResult.LeavePageButton, "Index", "Home", null, new { @class = "btn btn-success" })

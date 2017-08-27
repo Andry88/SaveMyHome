@@ -1,6 +1,7 @@
 ﻿@model SaveMyHome.ViewModels.AnswerViewModel
+@using Resources 
 @{
-    ViewBag.Title = Resources.AnswerLayout.Title;
+    ViewBag.Title = AnswerLayout.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,19 +16,20 @@
 <div class="panel panel-primary">
     @using (Html.BeginForm("Answer", "Flood"))
      {
-        <div class="panel panel-heading"><b>@Resources.AnswerLayout.Answer:</b></div>
+        @Html.AntiForgeryToken()
+        <div class="panel panel-heading"><b>@AnswerLayout.Answer:</b></div>
         <div class="panel panel-body">
             <div class="form-group">
                 <div class="radio">@RenderBody()</div>
             </div>
             <div id="message" class="form-group">
                 <div>@Html.LabelFor(m => m.CurrAnswer)</div>
-                <div>@Html.TextArea("CurrAnswer", null, 5, 50, new { @class = "form-control" })</div>
+                <div>@Html.TextArea("CurrAnswer", null, 3, 50, new { @class = "form-control" })</div>
                 <div>@Html.ValidationMessageFor(m => m.CurrAnswer)</div>
             </div>
         </div>
         <div class="panel panel-footer">
-            <input type="submit" value="@Resources.AnswerLayout.Answer" class="btn btn-danger"/>
+            <input type="submit" value="@AnswerLayout.Answer" class="btn btn-danger"/>
         </div>
      }
 </div>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using Resources;
 
 namespace SaveMyHome.Helpers
 {
@@ -38,12 +39,13 @@ namespace SaveMyHome.Helpers
                 
                 //Текст email-сообщения
                 string body = new StringBuilder()
-                    .AppendLine($"<div>{message.ClientProfile.FullName}, кв №{message.ClientProfile.ApartmentNumber}:<br/>")
+                    .AppendLine($"<div>{message.ClientProfile.FullName}, " +
+                    $"{HeadAndAnswerMessages.Apart} №{message.ClientProfile.ApartmentNumber}:<br/>")
                     .AppendLine($"<b>{message.Text}</b></div>")
                     .AppendLine($"<div>{message.Time.ToString()}</div>")
                     .AppendLine()
-                    .AppendLine($"<div>Перейдите по <a href = 'http://{hostAddress}'>ссылке</a> " +
-                                $"для ответа на оповещение</div>")
+                    .AppendLine($"<div>{Email.Follow} <a href = 'http://{hostAddress}'>{Email.Link}</a> " +
+                                $"{Email.ToAnswer}</div>")
                     .ToString();
 
                 //Список email-адресов для рассылки
@@ -51,7 +53,7 @@ namespace SaveMyHome.Helpers
 
                 foreach (string mailToAddress in emails)
                     smtpClient.Send(new MailMessage(emailSettings.MailFromAddress,
-                                    mailToAddress, "Внимание!!!", body) { IsBodyHtml = true });
+                                    mailToAddress, Email.Attention, body) { IsBodyHtml = true });
             }
         }
     }
