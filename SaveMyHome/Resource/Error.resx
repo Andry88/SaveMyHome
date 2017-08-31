@@ -126,6 +126,9 @@
   <data name="TryOnceAgain" xml:space="preserve">
     <value>Что-то пошло не так. Пожалуйста, попробуйте еще раз!</value>
   </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Пользователь не найден</value>
+  </data>
   <data name="_Error" xml:space="preserve">
     <value>Ошибка</value>
   </data>

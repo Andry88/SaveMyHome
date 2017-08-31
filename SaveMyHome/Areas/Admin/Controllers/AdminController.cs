@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Resources;
 
 namespace SaveMyHome.Areas.Admin.Controllers
 {
@@ -40,14 +41,14 @@ namespace SaveMyHome.Areas.Admin.Controllers
                 IdentityResult result = await UserManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
-                    TempData["msg"] = $"Пользователь {user.Email} был успешно удален";
+                    TempData["msg"] = $"{Resources.Admin.User} {user.Email} {Resources.Admin.WasSuccesfullyDeleted}";
                     return RedirectToAction("Index");
                 }
                 else
                     return View("Error", result.Errors);
             }
             else
-                return View("Error", new string[] { "Пользователь не найден" });
+                return View("Error", new string[] { Error.UserNotFound });
         }
        
         #region Helpers

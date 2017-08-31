@@ -120,7 +120,13 @@
   <data name="AddressOfVisitedResource" xml:space="preserve">
     <value>Адрес посещенного ресурса</value>
   </data>
+  <data name="User" xml:space="preserve">
+    <value>Пользователь</value>
+  </data>
   <data name="VisitDate" xml:space="preserve">
     <value>Дата посещения</value>
+  </data>
+  <data name="WasSuccesfullyDeleted" xml:space="preserve">
+    <value>был успешно удален</value>
   </data>
 </root>

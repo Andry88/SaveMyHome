@@ -6,15 +6,15 @@
 }
  <h4>@Account.CreateAccount</h4><hr/>
 
-@using(Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        @Html.Partial("_RegisterEditPartial", Model)
 
-        <button type="submit" class="btn btn-primary">Сохранить</button>
-        @Html.ActionLink("Отмена", "Index", "Home", null, new { @class = "btn btn-default" })
+    <div class="form-horizontal">
+        @{Html.RenderPartial("_RegisterEditPartial", Model);}
+
+        <button type="submit" class="btn btn-primary">@Account.SaveButton</button>
+        @Html.ActionLink(Account.CancelLink, "Index", "Home", null, new { @class = "btn btn-default" })
     </div>
 }
 

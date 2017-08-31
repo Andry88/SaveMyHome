@@ -14,14 +14,14 @@
 
 <div class="panel panel-warning">
     <div class="panel panel-heading">
-        @Html.Action("HeadMessage")
+        @{Html.RenderAction("HeadMessage");}
     </div>
     <div class="panel panel-body">
         <div class="form-group">
-            @Html.Action("FloorSchema")
+            @{Html.RenderAction("FloorSchema");}
         </div>
     </div>
-    @Html.Action("AnswerMessages")
+    @{Html.RenderAction("AnswerMessages");}
 </div>
 
     @Html.ActionLink(ReactionResult.LeavePageButton, "Index", "Home", null, new { @class = "btn btn-success" })

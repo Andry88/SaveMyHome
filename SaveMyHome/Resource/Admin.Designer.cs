@@ -70,11 +70,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пользователь.
+        /// </summary>
+        public static string User {
+            get {
+                return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Дата посещения.
         /// </summary>
         public static string VisitDate {
             get {
                 return ResourceManager.GetString("VisitDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to был успешно удален.
+        /// </summary>
+        public static string WasSuccesfullyDeleted {
+            get {
+                return ResourceManager.GetString("WasSuccesfullyDeleted", resourceCulture);
             }
         }
     }

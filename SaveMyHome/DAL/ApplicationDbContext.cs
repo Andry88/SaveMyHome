@@ -18,7 +18,7 @@ namespace SaveMyHome.DAL
         public DbSet<Visitor> Visitors { get; set; }
 
         public ApplicationDbContext()
-            : base("SaveMyHomeConnection", throwIfV1Schema: false)
+            : base("SaveMyHomeConnectionLocal", throwIfV1Schema: false)
         { }
 
         public static ApplicationDbContext Create() => new ApplicationDbContext();

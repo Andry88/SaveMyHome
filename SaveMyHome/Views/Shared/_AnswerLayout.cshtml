@@ -6,11 +6,11 @@
 }
 
 <div class="panel panel-warning">
-    <div class="panel panel-heading">@Html.Action("HeadMessage")</div>
+    <div class="panel panel-heading">@{Html.RenderAction("HeadMessage");}</div>
     <div class="panel panel-body">
-        <div class="form-group">@Html.Action("FloorSchema")</div>
+        <div class="form-group">@{Html.RenderAction("FloorSchema"); }</div>
     </div>
-    @Html.Action("AnswerMessages")
+    @{Html.RenderAction("AnswerMessages");}
 </div>
 
 <div class="panel panel-primary">

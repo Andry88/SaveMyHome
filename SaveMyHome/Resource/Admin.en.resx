@@ -120,7 +120,13 @@
   <data name="AddressOfVisitedResource" xml:space="preserve">
     <value>Address of the visited resource</value>
   </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
   <data name="VisitDate" xml:space="preserve">
     <value>Visit date</value>
+  </data>
+  <data name="WasSuccesfullyDeleted" xml:space="preserve">
+    <value>Was succesfully deleted</value>
   </data>
 </root>
