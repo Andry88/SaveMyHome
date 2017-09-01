@@ -8,10 +8,7 @@ namespace SaveMyHome.Filters
     public class LogAttribute : ActionFilterAttribute
     {
         IUnitOfWork Database;
-        public LogAttribute(IUnitOfWork database)
-        {
-            Database = database;
-        }
+        public LogAttribute(IUnitOfWork database) => Database = database;
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {

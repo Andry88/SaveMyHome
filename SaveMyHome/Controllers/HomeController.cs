@@ -15,10 +15,7 @@ namespace SaveMyHome.Controllers
     public class HomeController : Controller
     {
         IUnitOfWork Database;
-        public HomeController(IUnitOfWork database)
-        {
-            Database = database;
-        }
+        public HomeController(IUnitOfWork database) => Database = database;
 
         //Выводит главную страницу, а также. если пользователь аутентифицирован,
         //передает в представление статус посетителя для последующего принятия решения в представлении 

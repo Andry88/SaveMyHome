@@ -5,7 +5,7 @@
 
 
 @{ 
-    List<int> floors = Model.Select(a => a.Apartment.Floor).Distinct().ToList();//этажи, где находятся оповещенные квартиры
+    var floors = Model.Select(a => a.Apartment.Floor).Distinct().ToArray();//этажи, где находятся оповещенные квартиры
     //Т.к. элементы указаных ниже коллекций будут перебираться во вложенных циклах,
     //для увеличения производительности можно преобразовать их в HeshSet
     HashSet<int> notifiedApartments = new HashSet<int>(Model.Select(a => a.ApartmentNumber));//оповещенные квартиры

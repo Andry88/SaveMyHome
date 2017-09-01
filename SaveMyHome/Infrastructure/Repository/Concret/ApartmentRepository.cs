@@ -12,10 +12,7 @@ namespace SaveMyHome.Infrastructure.Repository.Concret
     {
         ApplicationDbContext db;
 
-        public ApartmentRepository(ApplicationDbContext context)
-        {
-            db = context;
-        }
+        public ApartmentRepository(ApplicationDbContext context) => db = context;
 
         public IQueryable<Apartment> All => db.Apartments;
 

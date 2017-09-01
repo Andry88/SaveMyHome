@@ -12,10 +12,7 @@ namespace SaveMyHome.Infrastructure.Repository.Concret
     {
         ApplicationDbContext db;
 
-        public EventRepository(ApplicationDbContext db)
-        {
-            this.db = db;
-        }
+        public EventRepository(ApplicationDbContext db) => this.db = db;
 
         public IQueryable<Event> All => db.Events;
 

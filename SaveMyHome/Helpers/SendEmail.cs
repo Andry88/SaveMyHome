@@ -22,10 +22,7 @@ namespace SaveMyHome.Helpers
     public class EmailNotifyProcessor : INotifyProcessor
     {
         private EmailSettings emailSettings;
-        public EmailNotifyProcessor(EmailSettings settings)
-        {
-            emailSettings = settings;
-        }
+        public EmailNotifyProcessor(EmailSettings settings) => emailSettings = settings;
 
         public void ProcessNotify(Message message, IEnumerable<Apartment> apartments, string hostAddress)
         {
@@ -49,7 +46,7 @@ namespace SaveMyHome.Helpers
                     .ToString();
 
                 //Список email-адресов для рассылки
-                List<string> emails = apartments.SelectMany(a => a.ClientProfiles.Select(u => u.ApplicationUser.Email)).ToList();
+                var emails = apartments.SelectMany(a => a.ClientProfiles.Select(u => u.ApplicationUser.Email)).ToArray();
 
                 foreach (string mailToAddress in emails)
                     smtpClient.Send(new MailMessage(emailSettings.MailFromAddress,

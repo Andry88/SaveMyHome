@@ -14,10 +14,7 @@ namespace SaveMyHome.Infrastructure.Repository.Concret
     {
         ApplicationDbContext db;
 
-        public ReactionRepository(ApplicationDbContext context)
-        {
-            db = context;
-        }
+        public ReactionRepository(ApplicationDbContext context) => db = context;
 
         public IQueryable<Reaction> All => db.Reactions;
         public IQueryable<Reaction> AllIncluding(params Expression<Func<Reaction, object>>[] includeProperties)
@@ -56,7 +53,7 @@ namespace SaveMyHome.Infrastructure.Repository.Concret
                 db.Entry(entity).State = EntityState.Deleted;
         }
 
-        public int LastReactionId => db.Reactions.OrderBy(r => r.Id).ToList().LastOrDefault()?.EventId ?? 0;
+        public int LastReactionId => db.Reactions.OrderBy(r => r.Id).ToArray().LastOrDefault()?.EventId ?? 0;
 
         public Reaction CurrentReaction
         {

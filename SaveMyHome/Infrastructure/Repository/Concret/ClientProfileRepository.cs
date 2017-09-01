@@ -13,10 +13,7 @@ namespace SaveMyHome.Infrastructure.Repository.Concret
     {
         ApplicationDbContext db;
 
-        public ClientProfileRepository(ApplicationDbContext db)
-        {
-            this.db = db;
-        }
+        public ClientProfileRepository(ApplicationDbContext db) => this.db = db;
 
         public ClientProfile CurrentClientProfile
         {

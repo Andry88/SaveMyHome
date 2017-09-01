@@ -81,7 +81,7 @@ namespace SaveMyHome.Controllers
             return View(new NotifyViewModel
             {
                 Apartments = GetApartmentsForNotification(currApart, problemStatus, Database.Reactions.LastReactionId, isSecond, 
-                             Database.Apartments.AllIncluding(a => a.Reactions).ToList()),
+                             Database.Apartments.AllIncluding(a => a.Reactions).ToArray()),
                 ProblemStatus = problemStatus,
                 HeadMessage = headMsg,
                 ProblemId = Database.Problems.GetProblemIdByName("Потоп"),
@@ -134,9 +134,9 @@ namespace SaveMyHome.Controllers
                     Database.Save();
 
                     //Обновление реакций квартир неуспевших ответить
-                    List<Reaction> notAnsweredReactions = Database.Reactions.All
+                    var notAnsweredReactions = Database.Reactions.All
                         .Where(r => r.EventId == lastReactionId && !r.Reacted)
-                        .ToList();
+                        .ToArray();
 
                     foreach (Reaction r in notAnsweredReactions)
                     {
@@ -195,7 +195,7 @@ namespace SaveMyHome.Controllers
                 //Оповестить через email
                 if(model.SendEmail)
                     notifyProcessor.ProcessNotify(msg, 
-                        GetNotifiedApartments().Select(r => r.Apartment).ToList(), 
+                        GetNotifiedApartments().Select(r => r.Apartment).ToArray(), 
                         Request.Url.Authority);
 
                 return View("ReactionResult");
@@ -203,7 +203,7 @@ namespace SaveMyHome.Controllers
             else //если модель не прошла валидацию,
             {   //то в представление повторно отправляется список оповещаемых квартир
                 model.Apartments = GetApartmentsForNotification(CurrentUserProfile.Apartment, 
-                    model.ProblemStatus, lastReactionId, model.IsSecondNotify, Database.Apartments.All.ToList());
+                    model.ProblemStatus, lastReactionId, model.IsSecondNotify, Database.Apartments.All.ToArray());
                 return View(model);
             }
         }
@@ -325,8 +325,8 @@ namespace SaveMyHome.Controllers
         public PartialViewResult AnswerMessages()
         {
             Reaction currentReaction = Database.Reactions.CurrentReaction;
-            List<Message> messages = Database.Messages.All
-                .Where(m => m.EventId == currentReaction.EventId && !m.IsHead).ToList();
+            var messages = Database.Messages.All
+                .Where(m => m.EventId == currentReaction.EventId && !m.IsHead).ToArray();
             return PartialView(messages);
         }
         #endregion
@@ -335,9 +335,9 @@ namespace SaveMyHome.Controllers
         //Генерирует квартиры для оповещения исходя из статуса оповещающего 
         //и потенциальной уязвимости к потопу из-за своего положения относительно квартиры оповещающего
         internal IList<int> GetApartmentsForNotification(Apartment currApart, ProblemStatus problemStatus, 
-            int lastReactionId, bool isSecond, List<Apartment> allApartments)
+            int lastReactionId, bool isSecond, IEnumerable<Apartment> allApartments)
         {
-            var apartmentsForNotification = new List<int>();
+            int[] apartmentsForNotification = default;
 
             if (problemStatus == ProblemStatus.Culprit)
             {
@@ -352,9 +352,9 @@ namespace SaveMyHome.Controllers
                      || isSecond ? !a.Reactions.Any(r => r.EventId == lastReactionId && r.Reacted)
                                  //Позволяет получить для оповещения квартиры, участвовавшие в прошлых уже завершенных событиях
                                  : !a.Reactions.Any(r => r.EventId == lastReactionId && !r.Reacted)))
-                     .OrderBy(a => a.Number).Select(a =>a.Number).ToList();
+                     .OrderBy(a => a.Number).Select(a =>a.Number).ToArray();
 
-                    apartmentsForNotification.AddRange(res);
+                    apartmentsForNotification = res;
                 }
             }
             else {
@@ -364,9 +364,9 @@ namespace SaveMyHome.Controllers
                     a.Number >= (currApart.Number + House.ApartmentsWithinFloor * i - House.AlertRangeHorizontal)
                     && a.Number <= (currApart.Number + House.ApartmentsWithinFloor * i + House.AlertRangeHorizontal)
                     && a.Floor == currApart.Floor + i)
-                    .OrderBy(a => a.Number).Select(a => a.Number).ToList();
+                    .OrderBy(a => a.Number).Select(a => a.Number).ToArray();
 
-                    apartmentsForNotification.AddRange(res);
+                    apartmentsForNotification = res;
                 }
             }
             return apartmentsForNotification;
@@ -377,7 +377,7 @@ namespace SaveMyHome.Controllers
         {
             int currentEventId = Database.Reactions.CurrentReaction.EventId;
             return Database.Reactions.AllIncluding(r => r.Apartment).Where(r => r.EventId == currentEventId && !r.Notifier)
-                              .OrderBy(r => r.ApartmentNumber).ToList();
+                              .OrderBy(r => r.ApartmentNumber).ToArray();
         }
 
         protected override void Dispose(bool disposing)

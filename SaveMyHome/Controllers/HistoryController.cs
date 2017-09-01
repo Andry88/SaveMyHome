@@ -9,10 +9,7 @@ namespace SaveMyHome.Controllers
     public class HistoryController : Controller
     {
         IUnitOfWork Database;
-        public HistoryController(IUnitOfWork unitOfWork)
-        {
-            this.Database = unitOfWork;
-        }
+        public HistoryController(IUnitOfWork unitOfWork) => Database = unitOfWork;
 
         public ViewResult ProblemHistory()
         {

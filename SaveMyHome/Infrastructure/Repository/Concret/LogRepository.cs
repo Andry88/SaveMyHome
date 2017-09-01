@@ -9,10 +9,7 @@ namespace SaveMyHome.Infrastructure.Repository.Concret
     public class LogRepository : ILogRepository
     {
         ApplicationDbContext db;
-        public LogRepository(ApplicationDbContext db)
-        {
-            this.db = db;
-        }
+        public LogRepository(ApplicationDbContext db) => this.db = db;
 
         public IEnumerable<Visitor> All => db.Visitors;
 
