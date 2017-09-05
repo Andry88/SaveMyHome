@@ -25,18 +25,12 @@ namespace SaveMyHome.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                List<Reaction> reactions = null;
-                try
-                {
-                    reactions = Database.ClientProfiles.CurrentClientProfile.Apartment.Reactions.ToList();
-                }
-                catch (NullReferenceException)
-                {
-                    reactions = new List<Reaction>();
-                }
-                
-                if (reactions.Count > 0)
-                    ViewBag.ProblemStatus = reactions.LastOrDefault().ProblemStatus;
+                ViewBag.ProblemStatus = Database.ClientProfiles
+                                               ?.CurrentClientProfile
+                                               ?.Apartment
+                                               ?.Reactions
+                                               ?.LastOrDefault()
+                                                .ProblemStatus;
             }
             return View();
         }
